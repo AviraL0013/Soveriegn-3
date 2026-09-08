@@ -1,0 +1,624 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Sovereign Protocol - Unified Audit Ledger</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed": "#1c1b1b",
+            "on-primary-fixed-variant": "#002fc8",
+            "primary": "#0037e4",
+            "on-surface": "#1b1c19",
+            "on-tertiary": "#ffffff",
+            "on-error": "#ffffff",
+            "tertiary-container": "#007950",
+            "surface-tint": "#1e47f3",
+            "background": "#faf9f4",
+            "surface-container-low": "#f5f4ef",
+            "surface-container-high": "#e9e8e3",
+            "secondary-fixed": "#e5e2e1",
+            "surface-container": "#efeee9",
+            "on-error-container": "#93000a",
+            "on-secondary": "#ffffff",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#00105b",
+            "secondary-container": "#e5e2e1",
+            "outline-variant": "#c4c5d9",
+            "surface-container-highest": "#e3e3de",
+            "tertiary-fixed-dim": "#71dba6",
+            "surface-variant": "#e3e3de",
+            "on-tertiary-fixed-variant": "#005235",
+            "on-secondary-fixed-variant": "#474646",
+            "surface-container-lowest": "#ffffff",
+            "error": "#ba1a1a",
+            "on-tertiary-fixed": "#002113",
+            "on-tertiary-container": "#9affca",
+            "on-surface-variant": "#444656",
+            "secondary": "#5f5e5e",
+            "surface": "#faf9f4",
+            "outline": "#747688",
+            "on-primary-container": "#e9e9ff",
+            "on-secondary-container": "#656464",
+            "primary-fixed-dim": "#bac3ff",
+            "on-background": "#1b1c19",
+            "inverse-surface": "#30312e",
+            "error-container": "#ffdad6",
+            "primary-container": "#3155ff",
+            "surface-bright": "#faf9f4",
+            "tertiary-fixed": "#8df7c1",
+            "primary-fixed": "#dee0ff",
+            "tertiary": "#005e3d",
+            "inverse-on-surface": "#f2f1ec",
+            "secondary-fixed-dim": "#c8c6c5",
+            "inverse-primary": "#bac3ff",
+            "surface-dim": "#dbdad5"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "unit-8": "2rem",
+            "unit-2": "0.5rem",
+            "unit-16": "4rem",
+            "unit-1": "0.25rem",
+            "gutter-mobile": "0.75rem",
+            "unit-4": "1rem",
+            "margin-desktop": "2.5rem",
+            "unit-10": "2.5rem",
+            "unit-3": "0.75rem",
+            "unit-5": "1.25rem",
+            "gutter-desktop": "1.25rem",
+            "margin-mobile": "1rem",
+            "unit-6": "1.5rem",
+            "unit-12": "3rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Geist"],
+            "display-lg": ["Geist"],
+            "headline-md": ["Geist"],
+            "body-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-caps": ["JetBrains Mono"],
+            "display-lg-mobile": ["Geist"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Geist"],
+            "code-md": ["JetBrains Mono"],
+            "num-table": ["Inter"],
+            "num-display": ["Inter"],
+            "num-headline": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "headline-lg-mobile": ["Geist"]
+          },
+          "fontSize": {
+            "headline-sm": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+            "headline-md": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+            "label-caps": ["10px", {"lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+            "display-lg-mobile": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+            "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.03em", "fontWeight": "600"}],
+            "code-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+            "num-table": ["13px", {"lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "600"}],
+            "num-display": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+            "num-headline": ["24px", {"lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "code-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-surface-container-low text-on-surface antialiased min-h-screen flex selection:bg-primary selection:text-white">
+<!-- SideNavBar Component -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col justify-between bg-surface-container-lowest border-r-2 border-on-surface shadow-[2px_0px_0px_#1b1c19] z-40">
+<div class="flex flex-col">
+<!-- Header / Brand -->
+<div class="p-unit-5 border-b-2 border-on-surface bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-unit-3">
+<div class="w-8 h-8 bg-on-surface flex items-center justify-center text-surface-container-lowest shadow-[2px_2px_0px_#3155ff]">
+<span class="font-label-caps text-label-caps font-bold">SOV</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface tracking-tight leading-none">SOVEREIGN</div>
+<div class="font-label-caps text-label-caps text-secondary mt-0.5 tracking-wider">AGREEMENT PROTOCOL</div>
+</div>
+</div>
+</div>
+<!-- Protocol State Pill -->
+<div class="px-unit-4 py-unit-3 bg-surface-container border-b border-on-surface flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface flex items-center gap-1.5">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary"></span>
+          PROTOCOL ACTIVE
+        </span>
+<span class="font-code-sm text-code-sm text-secondary">MAINNET//PROD</span>
+</div>
+<!-- Navigation Tabs (Shared Components JSON) -->
+<nav class="p-unit-3 space-y-1 font-code-md text-code-md uppercase tracking-wider">
+<!-- Tab: Overview -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container-high font-medium transition-none" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+<span>Overview</span>
+</a>
+<!-- Tab: Agreements -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container-high font-medium transition-none" href="#">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+<span>Agreements</span>
+</a>
+<!-- Tab: Negotiation -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container-high font-medium transition-none" href="#">
+<span class="material-symbols-outlined text-[18px]">handshake</span>
+<span>Negotiation</span>
+</a>
+<!-- Tab: Monitoring -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container-high font-medium transition-none" href="#">
+<span class="material-symbols-outlined text-[18px]">analytics</span>
+<span>Monitoring</span>
+</a>
+<!-- Tab: Activity (ACTIVE STATE MATCHING JSON SPEC) -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 bg-on-surface text-surface-container-lowest font-semibold border border-on-surface translate-x-0.5 translate-y-0.5 shadow-[1px_1px_0px_#1b1c19]" href="#">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">history</span>
+<span>Activity</span>
+</a>
+<!-- Tab: Agents -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container-high font-medium transition-none" href="#">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+<span>Agents</span>
+</a>
+</nav>
+</div>
+<!-- Sidebar Bottom Action & Nodes -->
+<div class="p-unit-4 border-t-2 border-on-surface bg-surface-container-low space-y-3">
+<div class="px-unit-3 py-unit-2 border border-on-surface bg-surface-container-lowest flex items-center justify-between shadow-[2px_2px_0px_#1b1c19]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-caps text-label-caps text-on-surface">Signer Authorized</span>
+</div>
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+</div>
+<div class="grid grid-cols-2 gap-2 text-center font-code-sm text-code-sm">
+<div class="p-1.5 bg-surface-container border border-on-surface flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">check_circle</span>
+<span>Sepolia: Synced</span>
+</div>
+<div class="p-1.5 bg-surface-container border border-on-surface flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">hub</span>
+<span>Arc: Active</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-64 right-0 h-14 bg-surface-container-low border-b-2 border-on-surface shadow-[0px_2px_0px_#1b1c19] flex items-center justify-between px-unit-6 z-30">
+<div class="flex items-center gap-unit-4">
+<span class="font-label-caps text-label-caps text-on-surface font-bold uppercase tracking-widest bg-surface-container-highest px-unit-2 py-1 border border-on-surface">
+        CONTROL PLANE // v2.4
+      </span>
+<div class="hidden lg:flex items-center gap-unit-2 font-code-sm text-code-sm text-secondary">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span>BLOCK #19,482,104</span>
+</div>
+</div>
+<!-- Trailing Actions & Signer Address -->
+<div class="flex items-center gap-unit-3 font-code-sm text-code-sm tracking-widest uppercase">
+<div class="hidden sm:flex items-center gap-1.5 px-unit-3 py-1 bg-surface-container border border-on-surface">
+<span class="material-symbols-outlined text-[14px] text-tertiary">lock</span>
+<span>EPOCH #418</span>
+</div>
+<div class="flex items-center gap-2 px-unit-3 py-1 bg-surface-container-lowest border border-on-surface shadow-[2px_2px_0px_#1b1c19]">
+<span class="w-2 h-2 bg-tertiary rounded-full"></span>
+<span class="font-code-sm text-code-sm font-semibold">0x4F92...B9AC</span>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-64 mt-14 flex-1 p-unit-10 min-h-[calc(100vh-3.5rem)]">
+<div class="max-w-[1240px] mx-auto space-y-unit-6">
+<!-- Viewport Header Strip -->
+<section class="border-2 border-on-surface bg-surface-container-lowest p-unit-6 shadow-[2px_2px_0px_#1b1c19] flex flex-col md:flex-row md:items-center md:justify-between gap-unit-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-on-surface text-surface-container-lowest font-label-caps text-label-caps tracking-widest uppercase">
+              AUDIT TRAIL
+            </span>
+<span class="font-label-caps text-label-caps text-secondary tracking-widest">CHAIN SYNC: 100%</span>
+</div>
+<h1 class="font-display-lg text-headline-lg font-bold text-on-surface tracking-tight mt-1">
+            Activity
+          </h1>
+<p class="font-body-md text-body-md text-secondary mt-1">
+            A unified chronological record of cross-chain protocol execution.
+          </p>
+</div>
+<!-- Authorized Ledger Actors -->
+<div class="border border-on-surface bg-surface-container-low p-unit-3 flex flex-col gap-2 min-w-[280px]">
+<div class="flex items-center justify-between font-label-caps text-label-caps text-secondary border-b border-on-surface pb-1">
+<span>MUTUAL COUNTERPARTIES</span>
+<span>SECURE QUORUM</span>
+</div>
+<div class="flex flex-col gap-1.5 font-code-sm text-code-sm">
+<div class="flex items-center justify-between">
+<span class="text-on-surface font-semibold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+                alice.sovereign.eth
+              </span>
+<span class="font-label-caps text-label-caps px-1 bg-surface-container-highest border border-on-surface">PROPOSER</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface font-semibold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary inline-block"></span>
+                bob.sovereign.eth
+              </span>
+<span class="font-label-caps text-label-caps px-1 bg-surface-container-highest border border-on-surface">ACCEPTOR</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Protocol Ledger Metrics Counter Strip (High density Neo-Brutalist) -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-unit-4">
+<div class="bg-surface-container-lowest border border-on-surface p-unit-4 shadow-[2px_2px_0px_#1b1c19]">
+<div class="font-label-caps text-label-caps text-secondary mb-1">TOTAL EVENTS PARSED</div>
+<div class="font-num-headline text-num-headline font-bold text-on-surface">8</div>
+<div class="font-label-caps text-label-caps text-tertiary mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">check</span> VERIFIED BY LIGHT NODE
+          </div>
+</div>
+<div class="bg-surface-container-lowest border border-on-surface p-unit-4 shadow-[2px_2px_0px_#1b1c19]">
+<div class="font-label-caps text-label-caps text-secondary mb-1">CAPITAL ALLOCATED</div>
+<div class="font-num-headline text-num-headline font-bold text-on-surface">$100,000.00</div>
+<div class="font-label-caps text-label-caps text-secondary mt-1">ASSET: USDC (ARC VAULT)</div>
+</div>
+<div class="bg-surface-container-lowest border border-on-surface p-unit-4 shadow-[2px_2px_0px_#1b1c19]">
+<div class="font-label-caps text-label-caps text-secondary mb-1">ZK PROOF VERIFICATION</div>
+<div class="font-num-headline text-num-headline font-bold text-tertiary">0.42s</div>
+<div class="font-label-caps text-label-caps text-secondary mt-1">CIRCUIT: PLONK_V2_SOLVENCY</div>
+</div>
+<div class="bg-surface-container-lowest border border-on-surface p-unit-4 shadow-[2px_2px_0px_#1b1c19]">
+<div class="font-label-caps text-label-caps text-secondary mb-1">SETTLEMENT FINALITY</div>
+<div class="font-num-headline text-num-headline font-bold text-primary">COMPLETED</div>
+<div class="font-label-caps text-label-caps text-secondary mt-1">UNWOUND AT 12:44:18 UTC</div>
+</div>
+</section>
+<!-- Filter, Search & Export Bar -->
+<section class="bg-surface-container-lowest border-2 border-on-surface p-unit-4 shadow-[2px_2px_0px_#1b1c19] space-y-4">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-unit-4">
+<!-- Filter Chips -->
+<div class="flex flex-wrap items-center gap-2">
+<button class="px-unit-3 py-1.5 bg-on-surface text-surface-container-lowest border border-on-surface font-label-caps text-label-caps font-bold shadow-[2px_2px_0px_#1b1c19] active:translate-x-0.5 active:translate-y-0.5 transition-none">
+              ALL (8)
+            </button>
+<button class="px-unit-3 py-1.5 bg-surface-container border border-on-surface text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps font-semibold shadow-[2px_2px_0px_#1b1c19] active:translate-x-0.5 active:translate-y-0.5 transition-none">
+              SEPOLIA (5)
+            </button>
+<button class="px-unit-3 py-1.5 bg-surface-container border border-on-surface text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps font-semibold shadow-[2px_2px_0px_#1b1c19] active:translate-x-0.5 active:translate-y-0.5 transition-none">
+              ARC ESCROW (3)
+            </button>
+<button class="px-unit-3 py-1.5 bg-[#FEE2E2] border border-on-surface text-error hover:bg-error-container font-label-caps text-label-caps font-bold shadow-[2px_2px_0px_#1b1c19] active:translate-x-0.5 active:translate-y-0.5 transition-none flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+              BREACH EVENTS (1)
+            </button>
+</div>
+<!-- Action: Export Button -->
+<button class="flex items-center justify-center gap-2 px-unit-4 py-2 bg-surface-container-lowest text-on-surface border-2 border-on-surface font-code-sm text-code-sm font-bold tracking-wider hover:bg-surface-container shadow-[2px_2px_0px_#1b1c19] active:translate-x-0.5 active:translate-y-0.5 transition-none">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+<span>EXPORT CSV / JSON</span>
+</button>
+</div>
+<!-- Search Input Matrix -->
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-unit-3 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</span>
+<input class="w-full pl-unit-10 pr-unit-4 py-unit-3 bg-surface-container-lowest border border-on-surface font-code-md text-code-md text-on-surface placeholder:text-secondary focus:outline-none focus:border-2 focus:border-primary focus:shadow-[2px_2px_0px_#3155ff] transition-none rounded-none" placeholder="Filter by agreement, tx hash, or actor..." type="text">
+</div>
+</section>
+<!-- Structured Cross-Chain Execution Table -->
+<section class="bg-surface-container-lowest border-2 border-on-surface shadow-[4px_4px_0px_#1b1c19] overflow-hidden">
+<!-- Table Category Ribbon -->
+<div class="bg-surface-container-high border-b-2 border-on-surface px-unit-4 py-unit-2 flex items-center justify-between font-label-caps text-label-caps">
+<div class="flex items-center gap-2">
+<span class="font-bold text-on-surface">LEDGER CONTEXT:</span>
+<span class="text-secondary">CROSS-CHAIN RECONCILIATION PIPELINE</span>
+</div>
+<div class="text-secondary">
+            AUTONOMOUS ESCROW GUARANTEE [VERIFIED]
+          </div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#ECEAE2] border-b-2 border-on-surface font-label-caps text-label-caps uppercase text-on-surface">
+<th class="py-unit-3 px-unit-4 font-semibold tracking-wider w-[120px]">TIME</th>
+<th class="py-unit-3 px-unit-4 font-semibold tracking-wider">EVENT</th>
+<th class="py-unit-3 px-unit-4 font-semibold tracking-wider w-[140px]">AGREEMENT</th>
+<th class="py-unit-3 px-unit-4 font-semibold tracking-wider w-[140px]">CHAIN</th>
+<th class="py-unit-3 px-unit-4 font-semibold tracking-wider w-[120px] text-center">STATUS</th>
+<th class="py-unit-3 px-unit-4 font-semibold tracking-wider w-[160px] text-right">TRANSACTION HASH</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E2DFD2] font-body-sm text-body-sm">
+<!-- Row 1 -->
+<tr class="hover:bg-[#F9F9F6] border-l-2 border-l-transparent hover:border-l-primary transition-none">
+<td class="py-unit-4 px-unit-4 font-num-table text-num-table text-on-surface whitespace-nowrap">
+                  12:44:18 <span class="text-secondary text-[11px]">UTC</span>
+</td>
+<td class="py-unit-4 px-unit-4 font-body-md text-body-md font-semibold text-on-surface">
+                  Escrow Unwound &amp; Capital Returned
+                </td>
+<td class="py-unit-4 px-unit-4">
+<span class="font-code-sm text-code-sm px-2 py-0.5 bg-surface-container border border-on-surface text-on-surface">
+                    #SOV-8F29
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 font-code-sm text-code-sm text-on-surface">
+<span class="px-2 py-0.5 bg-surface-container border border-on-surface font-bold">ARC</span>
+</td>
+<td class="py-unit-4 px-unit-4 text-center">
+<span class="px-unit-2 py-0.5 bg-[#E6F4EA] text-[#00875A] border border-on-surface font-label-caps text-label-caps font-bold">
+                    [SETTLED]
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 text-right">
+<a class="font-code-md text-code-md text-primary hover:underline flex items-center justify-end gap-1" href="#">
+<span>0x91a4...82fd</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-[#F9F9F6] border-l-2 border-l-transparent hover:border-l-primary transition-none">
+<td class="py-unit-4 px-unit-4 font-num-table text-num-table text-on-surface whitespace-nowrap">
+                  12:44:02 <span class="text-secondary text-[11px]">UTC</span>
+</td>
+<td class="py-unit-4 px-unit-4 font-body-md text-body-md font-semibold text-on-surface">
+                  Cross-Chain Relay Confirmed
+                </td>
+<td class="py-unit-4 px-unit-4">
+<span class="font-code-sm text-code-sm px-2 py-0.5 bg-surface-container border border-on-surface text-on-surface">
+                    #SOV-8F29
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 font-code-sm text-code-sm text-on-surface">
+<span class="px-2 py-0.5 bg-surface-container border border-on-surface font-semibold">ARC / SEPOLIA</span>
+</td>
+<td class="py-unit-4 px-unit-4 text-center">
+<span class="px-unit-2 py-0.5 bg-primary-fixed text-on-primary-fixed border border-on-surface font-label-caps text-label-caps font-bold">
+                    [CONFIRMED]
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 text-right">
+<a class="font-code-md text-code-md text-primary hover:underline flex items-center justify-end gap-1" href="#">
+<span>0x7c12...44e1</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-[#F9F9F6] border-l-2 border-l-transparent hover:border-l-primary transition-none bg-[#FEF2F2]/40">
+<td class="py-unit-4 px-unit-4 font-num-table text-num-table text-on-surface whitespace-nowrap">
+                  12:43:51 <span class="text-secondary text-[11px]">UTC</span>
+</td>
+<td class="py-unit-4 px-unit-4 font-body-md text-body-md font-semibold text-error flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-error">warning</span>
+<span>Breach Verified via ZK-Proof</span>
+</td>
+<td class="py-unit-4 px-unit-4">
+<span class="font-code-sm text-code-sm px-2 py-0.5 bg-surface-container border border-on-surface text-on-surface">
+                    #SOV-8F29
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 font-code-sm text-code-sm text-on-surface">
+<span class="px-2 py-0.5 bg-surface-container border border-on-surface font-bold">SEPOLIA</span>
+</td>
+<td class="py-unit-4 px-unit-4 text-center">
+<span class="px-unit-2 py-0.5 bg-[#E6F4EA] text-[#00875A] border border-on-surface font-label-caps text-label-caps font-bold">
+                    [VERIFIED]
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 text-right">
+<a class="font-code-md text-code-md text-primary hover:underline flex items-center justify-end gap-1" href="#">
+<span>0x8f01...99bc</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-[#F9F9F6] border-l-2 border-l-transparent hover:border-l-primary transition-none">
+<td class="py-unit-4 px-unit-4 font-num-table text-num-table text-on-surface whitespace-nowrap">
+                  12:41:20 <span class="text-secondary text-[11px]">UTC</span>
+</td>
+<td class="py-unit-4 px-unit-4 font-body-md text-body-md font-semibold text-on-surface">
+                  Capital Balance Locked ($100k USDC)
+                </td>
+<td class="py-unit-4 px-unit-4">
+<span class="font-code-sm text-code-sm px-2 py-0.5 bg-surface-container border border-on-surface text-on-surface">
+                    #SOV-8F29
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 font-code-sm text-code-sm text-on-surface">
+<span class="px-2 py-0.5 bg-surface-container border border-on-surface font-bold">ARC</span>
+</td>
+<td class="py-unit-4 px-unit-4 text-center">
+<span class="px-unit-2 py-0.5 bg-[#FEF3C7] text-[#B45309] border border-on-surface font-label-caps text-label-caps font-bold">
+                    [LOCKED]
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 text-right">
+<a class="font-code-md text-code-md text-primary hover:underline flex items-center justify-end gap-1" href="#">
+<span>0x4a19...99ca</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-[#F9F9F6] border-l-2 border-l-transparent hover:border-l-primary transition-none">
+<td class="py-unit-4 px-unit-4 font-num-table text-num-table text-on-surface whitespace-nowrap">
+                  12:40:45 <span class="text-secondary text-[11px]">UTC</span>
+</td>
+<td class="py-unit-4 px-unit-4 font-body-md text-body-md font-semibold text-on-surface">
+                  Confidential Policy Verified
+                </td>
+<td class="py-unit-4 px-unit-4">
+<span class="font-code-sm text-code-sm px-2 py-0.5 bg-surface-container border border-on-surface text-on-surface">
+                    #SOV-8F29
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 font-code-sm text-code-sm text-on-surface">
+<span class="px-2 py-0.5 bg-surface-container border border-on-surface font-bold">SEPOLIA</span>
+</td>
+<td class="py-unit-4 px-unit-4 text-center">
+<span class="px-unit-2 py-0.5 bg-[#E6F4EA] text-[#00875A] border border-on-surface font-label-caps text-label-caps font-bold">
+                    [VERIFIED]
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 text-right">
+<a class="font-code-md text-code-md text-primary hover:underline flex items-center justify-end gap-1" href="#">
+<span>0x81d2...a43b</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-[#F9F9F6] border-l-2 border-l-transparent hover:border-l-primary transition-none">
+<td class="py-unit-4 px-unit-4 font-num-table text-num-table text-on-surface whitespace-nowrap">
+                  12:39:48 <span class="text-secondary text-[11px]">UTC</span>
+</td>
+<td class="py-unit-4 px-unit-4 font-body-md text-body-md font-semibold text-on-surface">
+                  Agreement Terms Converged (Round 04)
+                </td>
+<td class="py-unit-4 px-unit-4">
+<span class="font-code-sm text-code-sm px-2 py-0.5 bg-surface-container border border-on-surface text-on-surface">
+                    #SOV-8F29
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 font-code-sm text-code-sm text-on-surface">
+<span class="px-2 py-0.5 bg-surface-container border border-on-surface font-bold">SEPOLIA</span>
+</td>
+<td class="py-unit-4 px-unit-4 text-center">
+<span class="px-unit-2 py-0.5 bg-primary-fixed text-on-primary-fixed border border-on-surface font-label-caps text-label-caps font-bold">
+                    [SIGNED]
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 text-right">
+<a class="font-code-md text-code-md text-primary hover:underline flex items-center justify-end gap-1" href="#">
+<span>0x992b...e041</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+</td>
+</tr>
+<!-- Row 7 -->
+<tr class="hover:bg-[#F9F9F6] border-l-2 border-l-transparent hover:border-l-primary transition-none">
+<td class="py-unit-4 px-unit-4 font-num-table text-num-table text-on-surface whitespace-nowrap">
+                  12:38:10 <span class="text-secondary text-[11px]">UTC</span>
+</td>
+<td class="py-unit-4 px-unit-4 font-body-md text-body-md font-semibold text-on-surface">
+                  Intent Created &amp; Policy Committed
+                </td>
+<td class="py-unit-4 px-unit-4">
+<span class="font-code-sm text-code-sm px-2 py-0.5 bg-surface-container border border-on-surface text-on-surface">
+                    #SOV-8F29
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 font-code-sm text-code-sm text-on-surface">
+<span class="px-2 py-0.5 bg-surface-container border border-on-surface font-bold">SEPOLIA</span>
+</td>
+<td class="py-unit-4 px-unit-4 text-center">
+<span class="px-unit-2 py-0.5 bg-[#ECEAE2] text-on-surface border border-on-surface font-label-caps text-label-caps font-bold">
+                    [COMMITTED]
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 text-right">
+<a class="font-code-md text-code-md text-primary hover:underline flex items-center justify-end gap-1" href="#">
+<span>0x12c8...7710</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+</td>
+</tr>
+<!-- Row 8 -->
+<tr class="hover:bg-[#F9F9F6] border-l-2 border-l-transparent hover:border-l-primary transition-none">
+<td class="py-unit-4 px-unit-4 font-num-table text-num-table text-on-surface whitespace-nowrap">
+                  2d ago
+                </td>
+<td class="py-unit-4 px-unit-4 font-body-md text-body-md font-semibold text-on-surface">
+                  Agreement Matured &amp; Settled
+                </td>
+<td class="py-unit-4 px-unit-4">
+<span class="font-code-sm text-code-sm px-2 py-0.5 bg-surface-container border border-on-surface text-on-surface">
+                    #SOV-7B14
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 font-code-sm text-code-sm text-on-surface">
+<span class="px-2 py-0.5 bg-surface-container border border-on-surface font-bold">ARC</span>
+</td>
+<td class="py-unit-4 px-unit-4 text-center">
+<span class="px-unit-2 py-0.5 bg-[#E6F4EA] text-[#00875A] border border-on-surface font-label-caps text-label-caps font-bold">
+                    [SETTLED]
+                  </span>
+</td>
+<td class="py-unit-4 px-unit-4 text-right">
+<a class="font-code-md text-code-md text-primary hover:underline flex items-center justify-end gap-1" href="#">
+<span>0x33e8...11a9</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Ledger Footer Pagination and Health telemetry -->
+<div class="border-t-2 border-on-surface bg-surface-container-low px-unit-4 py-unit-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-unit-3">
+<div class="flex items-center gap-unit-3 font-code-sm text-code-sm text-secondary">
+<span>SHOWING 8 OF 8 TRANSACTIONS</span>
+<span class="w-1 h-1 bg-secondary rounded-full"></span>
+<span>AUDIT ROOT: 0x88f2e41c49b...</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-unit-3 py-1 bg-surface-container-lowest border border-on-surface font-code-sm text-code-sm text-secondary cursor-not-allowed">
+              PREV
+            </button>
+<span class="px-unit-3 py-1 bg-on-surface text-surface-container-lowest font-code-sm text-code-sm font-bold">
+              1
+            </span>
+<button class="px-unit-3 py-1 bg-surface-container-lowest border border-on-surface font-code-sm text-code-sm text-secondary cursor-not-allowed">
+              NEXT
+            </button>
+</div>
+</div>
+</section>
+<!-- Agreement Signature Strip (Protocol Assurance Component) -->
+<section class="border border-dashed border-on-surface bg-[#ECEAE2] p-unit-4 flex flex-col md:flex-row items-center justify-between gap-unit-4">
+<div class="flex items-center gap-unit-3">
+<span class="material-symbols-outlined text-primary text-[24px]">verified</span>
+<div>
+<div class="font-label-caps text-label-caps font-bold uppercase text-on-surface">
+              CRYPTOGRAPHIC FINALITY SEAL ACTIVE
+            </div>
+<div class="font-code-sm text-code-sm text-secondary">
+              HASH ROOT: 0x8f01...99bc | GAS CAP: 2,500,000 GWEI | BLOCK EXPIRY: #19,482,500
+            </div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-secondary">AUDIT STATUS:</span>
+<span class="px-2 py-0.5 bg-[#E6F4EA] text-[#00875A] border border-on-surface font-label-caps text-label-caps font-bold">
+            IMMUTABLE LEDGER VERIFIED
+          </span>
+</div>
+</section>
+</div>
+</main>
+</body></html>

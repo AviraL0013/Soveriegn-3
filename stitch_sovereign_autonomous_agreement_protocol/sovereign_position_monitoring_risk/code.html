@@ -1,0 +1,626 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Sovereign Protocol // Position Monitoring</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Fonts: Geist, Inter, JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed": "#1c1b1b",
+            "on-primary-fixed-variant": "#002fc8",
+            "primary": "#0037e4",
+            "on-surface": "#1b1c19",
+            "on-tertiary": "#ffffff",
+            "on-error": "#ffffff",
+            "tertiary-container": "#007950",
+            "surface-tint": "#1e47f3",
+            "background": "#faf9f4",
+            "surface-container-low": "#f5f4ef",
+            "surface-container-high": "#e9e8e3",
+            "secondary-fixed": "#e5e2e1",
+            "surface-container": "#efeee9",
+            "on-error-container": "#93000a",
+            "on-secondary": "#ffffff",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#00105b",
+            "secondary-container": "#e5e2e1",
+            "outline-variant": "#c4c5d9",
+            "surface-container-highest": "#e3e3de",
+            "tertiary-fixed-dim": "#71dba6",
+            "surface-variant": "#e3e3de",
+            "on-tertiary-fixed-variant": "#005235",
+            "on-secondary-fixed-variant": "#474646",
+            "surface-container-lowest": "#ffffff",
+            "error": "#ba1a1a",
+            "on-tertiary-fixed": "#002113",
+            "on-tertiary-container": "#9affca",
+            "on-surface-variant": "#444656",
+            "secondary": "#5f5e5e",
+            "surface": "#faf9f4",
+            "outline": "#747688",
+            "on-primary-container": "#e9e9ff",
+            "on-secondary-container": "#656464",
+            "primary-fixed-dim": "#bac3ff",
+            "on-background": "#1b1c19",
+            "inverse-surface": "#30312e",
+            "error-container": "#ffdad6",
+            "primary-container": "#3155ff",
+            "surface-bright": "#faf9f4",
+            "tertiary-fixed": "#8df7c1",
+            "primary-fixed": "#dee0ff",
+            "tertiary": "#005e3d",
+            "inverse-on-surface": "#f2f1ec",
+            "secondary-fixed-dim": "#c8c6c5",
+            "inverse-primary": "#bac3ff",
+            "surface-dim": "#dbdad5"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "unit-8": "2rem",
+            "unit-2": "0.5rem",
+            "unit-16": "4rem",
+            "unit-1": "0.25rem",
+            "gutter-mobile": "0.75rem",
+            "unit-4": "1rem",
+            "margin-desktop": "2.5rem",
+            "unit-10": "2.5rem",
+            "unit-3": "0.75rem",
+            "unit-5": "1.25rem",
+            "gutter-desktop": "1.25rem",
+            "margin-mobile": "1rem",
+            "unit-6": "1.5rem",
+            "unit-12": "3rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Inter", "sans-serif"],
+            "display-lg": ["Inter", "sans-serif"],
+            "headline-md": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "label-caps": ["JetBrains Mono", "monospace"],
+            "display-lg-mobile": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "headline-lg": ["Inter", "sans-serif"],
+            "code-md": ["JetBrains Mono", "monospace"],
+            "num-table": ["Inter", "sans-serif"],
+            "num-display": ["Inter", "sans-serif"],
+            "num-headline": ["Inter", "sans-serif"],
+            "code-sm": ["JetBrains Mono", "monospace"],
+            "headline-lg-mobile": ["Inter", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-sm": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+            "headline-md": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+            "label-caps": ["10px", {"lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+            "display-lg-mobile": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+            "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.03em", "fontWeight": "600"}],
+            "code-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+            "num-table": ["13px", {"lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "600"}],
+            "num-display": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+            "num-headline": ["24px", {"lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "code-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+    }
+    .custom-hard-shadow {
+      box-shadow: 2px 2px 0px #111111;
+    }
+    .custom-hard-shadow-lg {
+      box-shadow: 4px 4px 0px #111111;
+    }
+    .custom-hard-shadow-blue {
+      box-shadow: 2px 2px 0px #111111;
+    }
+    .custom-hard-shadow-blue:hover {
+      box-shadow: 3px 3px 0px #111111;
+      transform: translate(-1px, -1px);
+    }
+    .custom-hard-shadow-blue:active {
+      box-shadow: 0px 0px 0px #111111;
+      transform: translate(2px, 2px);
+    }
+  </style>
+</head>
+<body class="bg-surface-container-low text-on-surface antialiased min-h-screen selection:bg-primary selection:text-on-primary">
+<!-- ========================================================================= -->
+<!-- SIDE NAVIGATION (Shared Component: SideNavBar)                            -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col justify-between bg-surface-container-lowest border-r-2 border-on-surface shadow-[2px_0px_0px_#1b1c19] z-40">
+<!-- Top Brand Module -->
+<div>
+<div class="p-unit-5 border-b-2 border-on-surface bg-surface-container-low">
+<div class="flex items-center gap-unit-3">
+<div class="w-8 h-8 bg-on-surface flex items-center justify-center text-surface-container-lowest border border-on-surface">
+<span class="font-label-caps text-label-caps font-bold">SOV</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface tracking-tight leading-tight">SOVEREIGN</div>
+<div class="font-code-sm text-code-sm text-secondary font-medium tracking-wider">AGREEMENT PROTOCOL</div>
+</div>
+</div>
+<!-- Status Indicator Pill -->
+<div class="mt-unit-3 inline-flex items-center gap-unit-2 px-unit-2 py-0.5 border border-on-surface bg-surface-container text-on-surface">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+<span class="font-label-caps text-label-caps font-semibold uppercase">Signer Authorized</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="p-unit-3 flex flex-col gap-unit-1 font-code-md text-code-md uppercase tracking-wider">
+<!-- Tab: Overview (Inactive) -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container font-medium border border-transparent hover:border-on-surface transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<!-- Tab: Agreements (Inactive) -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container font-medium border border-transparent hover:border-on-surface transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span>Agreements</span>
+</a>
+<!-- Tab: Negotiation (Inactive) -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container font-medium border border-transparent hover:border-on-surface transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="handshake">handshake</span>
+<span>Negotiation</span>
+</a>
+<!-- Tab: Monitoring (ACTIVE per Prompt Requirements) -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 bg-on-surface text-surface-container-lowest font-semibold border border-on-surface translate-x-0.5 translate-y-0.5 shadow-[2px_2px_0px_#111111]" href="#">
+<span class="material-symbols-outlined" data-icon="analytics" data-weight="fill" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span>Monitoring</span>
+</a>
+<!-- Tab: Activity (Inactive) -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container font-medium border border-transparent hover:border-on-surface transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span>Activity</span>
+</a>
+<!-- Tab: Agents (Inactive) -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container font-medium border border-transparent hover:border-on-surface transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span>Agents</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Chain Telemetry Status -->
+<div class="p-unit-4 border-t-2 border-on-surface bg-surface-container-low font-code-sm text-code-sm">
+<div class="flex items-center justify-between text-on-surface mb-unit-2 pb-unit-2 border-b border-surface-container-highest">
+<span class="flex items-center gap-unit-2">
+<span class="material-symbols-outlined text-tertiary font-bold" data-icon="check_circle">check_circle</span>
+<span class="font-label-caps text-label-caps uppercase">Sepolia: Synced</span>
+</span>
+<span class="font-label-caps text-label-caps text-secondary font-mono">12ms</span>
+</div>
+<div class="flex items-center justify-between text-on-surface">
+<span class="flex items-center gap-unit-2">
+<span class="material-symbols-outlined text-primary font-bold" data-icon="hub">hub</span>
+<span class="font-label-caps text-label-caps uppercase">Arc: Active</span>
+</span>
+<span class="font-label-caps text-label-caps text-tertiary font-mono">99.98%</span>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- TOP BAR (Shared Component: TopNavBar)                                     -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 left-64 right-0 h-14 flex items-center justify-between px-unit-6 bg-surface-container-low border-b-2 border-on-surface shadow-[0px_2px_0px_#1b1c19] z-30 font-code-sm text-code-sm tracking-widest uppercase">
+<div class="flex items-center gap-unit-4">
+<span class="font-label-caps text-label-caps text-on-surface font-bold uppercase tracking-wider">CONTROL PLANE // v2.4</span>
+<span class="text-outline-variant font-bold">/</span>
+<span class="inline-flex items-center gap-unit-1 px-unit-2 py-0.5 border border-on-surface bg-surface-container text-on-surface font-label-caps text-label-caps">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+        ZK-MONITOR ACTIVE
+      </span>
+</div>
+<div class="flex items-center gap-unit-4">
+<!-- Gas & Block Metric -->
+<div class="hidden lg:flex items-center gap-unit-3 text-on-surface">
+<div class="flex items-center gap-unit-1 border border-on-surface px-unit-2 py-1 bg-surface-container-lowest custom-hard-shadow">
+<span class="material-symbols-outlined" data-icon="sync">sync</span>
+<span class="font-code-sm text-code-sm">BLOCK #19,482,104</span>
+</div>
+</div>
+<!-- Account Auth Pill -->
+<div class="flex items-center gap-unit-2 border border-on-surface px-unit-3 py-1 bg-surface-container-lowest custom-hard-shadow">
+<span class="material-symbols-outlined text-on-surface" data-icon="lock">lock</span>
+<span class="font-code-sm text-code-sm text-on-surface font-semibold tracking-normal">0x4F92...B9AC</span>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- MAIN WORKSPACE CANVAS                                                     -->
+<!-- ========================================================================= -->
+<main class="ml-64 pt-14 min-h-screen bg-surface-container-low">
+<div class="max-w-[1240px] mx-auto p-unit-8 pb-unit-16 space-y-unit-6">
+<!-- Breadcrumbs & Context Header Strip -->
+<div class="flex flex-col md:flex-row md:items-end justify-between pb-unit-5 border-b-2 border-on-surface gap-unit-4">
+<div>
+<div class="flex items-center gap-unit-2 font-label-caps text-label-caps text-secondary mb-unit-1 uppercase">
+<span>AGREEMENTS</span>
+<span>/</span>
+<span class="text-primary font-bold">SOV-8F29</span>
+<span>/</span>
+<span class="text-on-surface font-bold">MONITORING</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface">Position Monitoring</h1>
+<p class="font-body-md text-body-md text-secondary mt-0.5">Live risk evaluation for active agreement <span class="font-code-md text-code-md text-on-surface font-semibold">#SOV-8F29</span></p>
+</div>
+<!-- Counterparty Identity Node -->
+<div class="flex items-center border-2 border-on-surface bg-surface-container-lowest p-unit-2 custom-hard-shadow">
+<div class="flex items-center gap-unit-2 px-unit-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span class="font-code-sm text-code-sm font-semibold text-on-surface">alice.sovereign.eth</span>
+</div>
+<div class="px-unit-2 text-on-surface">
+<span class="material-symbols-outlined font-bold" data-icon="swap_horiz">swap_horiz</span>
+</div>
+<div class="flex items-center gap-unit-2 px-unit-2">
+<span class="w-2.5 h-2.5 rounded-full bg-on-surface"></span>
+<span class="font-code-sm text-code-sm font-semibold text-on-surface">bob.sovereign.eth</span>
+</div>
+</div>
+</div>
+<!-- ======================================================================= -->
+<!-- 1. DOMINANT METRIC BLOCK + POSITION DATA                                -->
+<!-- ======================================================================= -->
+<section class="border-2 border-on-surface bg-surface-container-lowest custom-hard-shadow-lg">
+<!-- Metric Box Sub-header strip -->
+<div class="bg-surface-container px-unit-5 py-unit-2 border-b-2 border-on-surface flex items-center justify-between">
+<div class="flex items-center gap-unit-2">
+<span class="font-label-caps text-label-caps font-bold uppercase tracking-wider text-on-surface">REAL-TIME RISK ENGINE TELEMETRY</span>
+<span class="font-code-sm text-code-sm text-secondary">// LATENCY 42MS</span>
+</div>
+<div class="flex items-center gap-unit-2">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary-container animate-ping"></span>
+<span class="font-label-caps text-label-caps font-semibold text-tertiary uppercase">EVALUATOR ACTIVE</span>
+</div>
+</div>
+<div class="p-unit-6 md:p-unit-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-unit-6 items-center">
+<!-- Left: Large Financial Metric Display -->
+<div class="lg:col-span-6 border-b lg:border-b-0 lg:border-r-2 border-on-surface pb-unit-6 lg:pb-0 lg:pr-unit-8">
+<div class="flex items-center gap-unit-3 mb-unit-2">
+<span class="font-label-caps text-label-caps font-bold text-secondary uppercase tracking-widest">CURRENT OBSERVED RISK</span>
+<span class="px-unit-2 py-0.5 border border-on-surface bg-[#E6F4EA] text-tertiary font-label-caps text-label-caps font-bold uppercase tracking-wider">
+                  MONITORING SAFE
+                </span>
+</div>
+<div class="flex items-baseline gap-unit-4">
+<div class="font-num-display text-[68px] leading-[68px] font-bold text-on-surface tracking-tighter">
+                  1.8%
+                </div>
+<div class="font-code-md text-code-md text-secondary">
+<span class="text-tertiary font-bold">▲ 0.00%</span> (0.0% drift delta)
+                </div>
+</div>
+<div class="mt-unit-4 pt-unit-3 border-t border-surface-container-highest flex items-center justify-between text-secondary font-code-sm text-code-sm">
+<span>ESTIMATED SAFE MARGIN</span>
+<span class="text-on-surface font-semibold">SUFFICIENT ESCROW BACKING</span>
+</div>
+</div>
+<!-- Right: Paired Position Metadata Modules -->
+<div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-unit-4">
+<!-- Position Principal -->
+<div class="p-unit-4 border border-on-surface bg-surface-container-low custom-hard-shadow">
+<div class="font-label-caps text-label-caps text-secondary uppercase font-semibold">PRINCIPAL ESCROW</div>
+<div class="mt-unit-2 font-num-headline text-num-headline font-bold text-on-surface">$100,000</div>
+<div class="mt-unit-1 font-label-caps text-label-caps text-primary font-semibold">USDC (SYNTHETIC)</div>
+</div>
+<!-- APR Performance -->
+<div class="p-unit-4 border border-on-surface bg-surface-container-low custom-hard-shadow">
+<div class="font-label-caps text-label-caps text-secondary uppercase font-semibold">AGREEMENT YIELD</div>
+<div class="mt-unit-2 font-num-headline text-num-headline font-bold text-on-surface">8.40%</div>
+<div class="mt-unit-1 font-label-caps text-label-caps text-secondary font-semibold">FIXED APR</div>
+</div>
+<!-- Maturity Tenure -->
+<div class="p-unit-4 border border-on-surface bg-surface-container-low custom-hard-shadow">
+<div class="font-label-caps text-label-caps text-secondary uppercase font-semibold">TENURE REMAINING</div>
+<div class="mt-unit-2 font-num-headline text-num-headline font-bold text-on-surface">25 Days</div>
+<div class="mt-unit-1 font-label-caps text-label-caps text-secondary font-semibold">EXP: 04-MAY-2025</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ======================================================================= -->
+<!-- 2. CONFIDENTIAL POLICY BOUNDARY BLOCK (NO NUMERICAL REVELATION)         -->
+<!-- ======================================================================= -->
+<section class="border-2 border-on-surface bg-surface-container p-unit-6 custom-hard-shadow relative overflow-hidden">
+<!-- Diagonal watermark pattern strip or badge -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-unit-4">
+<div class="flex items-start gap-unit-4">
+<div class="w-12 h-12 border-2 border-on-surface bg-surface-container-lowest flex items-center justify-center text-on-surface shadow-[2px_2px_0px_#111111] shrink-0">
+<span class="material-symbols-outlined text-2xl font-bold" data-icon="lock" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<div>
+<div class="flex items-center gap-unit-3">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface tracking-tight">PRIVATE THRESHOLD LOCKED</h3>
+<span class="px-unit-2 py-0.5 border border-on-surface bg-on-surface text-surface-container-lowest font-label-caps text-label-caps font-bold">
+                  ZERO KNOWLEDGE
+                </span>
+</div>
+<p class="font-body-md text-body-md text-secondary mt-1">
+                Confidential policy boundary enforced via zero-knowledge policy commitment <span class="font-code-md text-code-md text-on-surface font-semibold bg-surface-container-lowest px-1 border border-on-surface">0x71c4...9e11</span>.
+              </p>
+<div class="mt-unit-3 flex items-center gap-unit-2 text-on-surface font-code-sm text-code-sm bg-surface-container-lowest border border-on-surface p-unit-2 w-fit">
+<span class="material-symbols-outlined text-primary text-base font-bold" data-icon="verified_user">verified_user</span>
+<span class="font-medium">Confidential boundary is protected. Evaluator monitors continuous drift without revealing threshold.</span>
+</div>
+</div>
+</div>
+<!-- Cryptographic Seal Pill -->
+<div class="shrink-0 border-2 border-dashed border-on-surface p-unit-3 bg-surface-container-lowest text-right font-code-sm text-code-sm">
+<div class="font-label-caps text-label-caps text-secondary uppercase font-bold">ZK-PROOF SYSTEM</div>
+<div class="text-on-surface font-bold mt-0.5">Groth16 / BN254</div>
+<div class="text-tertiary font-semibold mt-1 flex items-center justify-end gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+              VERIFIED AT ROOT
+            </div>
+</div>
+</div>
+</section>
+<!-- ======================================================================= -->
+<!-- 3. RISK PROGRESSION CHART + 4. DETERMINISTIC SIMULATION CONTROL         -->
+<!-- ======================================================================= -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-unit-6">
+<!-- RISK PROGRESSION CHART (Neo-brutalist Minimalist Graph) -->
+<section class="lg:col-span-8 border-2 border-on-surface bg-surface-container-lowest p-unit-6 custom-hard-shadow flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between border-b-2 border-on-surface pb-unit-3 mb-unit-6">
+<div>
+<span class="font-label-caps text-label-caps font-bold text-secondary uppercase tracking-widest">TRAJECTORY TELEMETRY</span>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Observed Risk Progression</h2>
+</div>
+<div class="flex items-center gap-unit-3">
+<span class="px-unit-3 py-1 border border-on-surface bg-surface-container font-label-caps text-label-caps font-bold text-on-surface">
+                  STEP 1 OF 5 (BASELINE)
+                </span>
+</div>
+</div>
+<!-- Neo-Brutalist Pure CSS/SVG Chart Container -->
+<div class="relative w-full h-64 border-2 border-on-surface bg-surface-container-low p-unit-4 overflow-hidden">
+<!-- Background Grid Matrix Lines -->
+<div class="absolute inset-0 grid grid-cols-5 grid-rows-4 pointer-events-none opacity-30">
+<div class="border-r border-b border-on-surface"></div>
+<div class="border-r border-b border-on-surface"></div>
+<div class="border-r border-b border-on-surface"></div>
+<div class="border-r border-b border-on-surface"></div>
+<div class="border-b border-on-surface"></div>
+<div class="border-r border-b border-on-surface"></div>
+<div class="border-r border-b border-on-surface"></div>
+<div class="border-r border-b border-on-surface"></div>
+<div class="border-r border-b border-on-surface"></div>
+<div class="border-b border-on-surface"></div>
+<div class="border-r border-b border-on-surface"></div>
+<div class="border-r border-b border-on-surface"></div>
+<div class="border-r border-b border-on-surface"></div>
+<div class="border-r border-b border-on-surface"></div>
+<div class="border-b border-on-surface"></div>
+<div class="border-r border-on-surface"></div>
+<div class="border-r border-on-surface"></div>
+<div class="border-r border-on-surface"></div>
+<div class="border-r border-on-surface"></div>
+<div></div>
+</div>
+<!-- Confidential Threshold Redacted Horizon Area (Top Area Obfuscated) -->
+<div class="absolute top-0 left-0 right-0 h-14 bg-surface-container border-b-2 border-dashed border-on-surface flex items-center justify-between px-unit-4 opacity-90 z-0">
+<span class="font-code-sm text-code-sm text-secondary font-bold tracking-widest uppercase">
+                  🔒 CONFIDENTIAL POLICY HORIZON [RANGE ENCRYPTED]
+                </span>
+<span class="font-label-caps text-label-caps text-on-surface bg-surface-container-lowest px-unit-2 py-0.5 border border-on-surface font-bold">
+                  ZK-GUARD
+                </span>
+</div>
+<!-- SVG Crisp Graph Line & Data Points -->
+<svg class="absolute inset-0 w-full h-full p-unit-6 overflow-visible z-10" preserveAspectRatio="none" viewBox="0 0 500 200">
+<!-- Zero reference baseline -->
+<line stroke="#111111" stroke-width="2" x1="0" x2="500" y1="180" y2="180"></line>
+<!-- Projection Path (Future Steps Dotted) -->
+<polyline fill="none" points="50,150 150,135 250,110 350,75 450,40" stroke="#747688" stroke-dasharray="6,4" stroke-width="2"></polyline>
+<!-- Active Trajectory Up to Step 1 -->
+<line stroke="#111111" stroke-width="3" x1="0" x2="50" y1="155" y2="150"></line>
+<!-- Step 1 Point (Active) -->
+<circle cx="50" cy="150" fill="#3155FF" r="6" stroke="#111111" stroke-width="2"></circle>
+<circle cx="50" cy="150" fill="none" r="11" stroke="#3155FF" stroke-dasharray="3,2" stroke-width="1.5"></circle>
+<!-- Future Step Targets (Hollow Squares) -->
+<rect fill="#FFFFFF" height="10" stroke="#111111" stroke-width="2" width="10" x="145" y="130"></rect>
+<rect fill="#FFFFFF" height="10" stroke="#111111" stroke-width="2" width="10" x="245" y="105"></rect>
+<rect fill="#FFFFFF" height="10" stroke="#111111" stroke-width="2" width="10" x="345" y="70"></rect>
+<rect fill="#FFFFFF" height="10" stroke="#111111" stroke-width="2" width="10" x="445" y="35"></rect>
+</svg>
+<!-- Floating Tooltip for Step 1 -->
+<div class="absolute bottom-12 left-12 bg-on-surface text-surface-container-lowest p-unit-2 border border-on-surface shadow-[2px_2px_0px_#111111] z-20">
+<div class="font-label-caps text-label-caps font-mono font-bold text-primary-fixed">STEP 1: 1.8% (CURRENT)</div>
+<div class="font-code-sm text-code-sm text-surface-variant font-medium">Status: In Escrow Equilibrium</div>
+</div>
+</div>
+<!-- X-Axis Milestone Grid Labels -->
+<div class="grid grid-cols-5 text-center mt-unit-3 font-code-sm text-code-sm text-on-surface border-t-2 border-on-surface pt-unit-2">
+<div class="font-bold text-primary">
+<div>STEP 1</div>
+<div class="font-num-table text-num-table">1.8% (NOW)</div>
+</div>
+<div class="text-secondary opacity-70">
+<div>STEP 2</div>
+<div class="font-num-table text-num-table">Simulated</div>
+</div>
+<div class="text-secondary opacity-70">
+<div>STEP 3</div>
+<div class="font-num-table text-num-table">Simulated</div>
+</div>
+<div class="text-secondary opacity-70">
+<div>STEP 4</div>
+<div class="font-num-table text-num-table">Simulated</div>
+</div>
+<div class="text-secondary opacity-70">
+<div>STEP 5</div>
+<div class="font-num-table text-num-table">Terminal</div>
+</div>
+</div>
+</div>
+<!-- Bottom Micro-legend -->
+<div class="mt-unit-6 pt-unit-3 border-t border-surface-container-highest flex flex-wrap items-center justify-between gap-unit-3 font-code-sm text-code-sm text-secondary">
+<div class="flex items-center gap-unit-4">
+<span class="flex items-center gap-unit-2">
+<span class="w-3 h-3 bg-primary border border-on-surface"></span>
+<span>Active Continuous Point</span>
+</span>
+<span class="flex items-center gap-unit-2">
+<span class="w-3 h-3 bg-surface-container-lowest border border-on-surface"></span>
+<span>Deterministic Escalation Step</span>
+</span>
+</div>
+<div class="font-label-caps text-label-caps text-on-surface font-semibold">
+              SAMPLE RATE: 1 BLOCK (~12 SEC)
+            </div>
+</div>
+</section>
+<!-- 4. DETERMINISTIC SIMULATION CONTROL BLOCK -->
+<section class="lg:col-span-4 border-2 border-on-surface bg-surface-container-lowest p-unit-6 custom-hard-shadow flex flex-col justify-between">
+<div>
+<!-- Box Title -->
+<div class="border-b-2 border-on-surface pb-unit-3 mb-unit-4 flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps font-bold text-secondary uppercase tracking-widest">ADVERSARIAL SUITE</span>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">SIMULATION CONTROL</h2>
+</div>
+<span class="material-symbols-outlined text-on-surface" data-icon="terminal">terminal</span>
+</div>
+<!-- Description -->
+<p class="font-body-md text-body-md text-secondary leading-relaxed">
+              Deterministic adversary risk escalation simulation. Test zk-boundary verification and protocol safety rails step-by-step.
+            </p>
+<!-- State Summary Plate -->
+<div class="mt-unit-5 p-unit-4 border-2 border-on-surface bg-surface-container">
+<div class="font-label-caps text-label-caps text-secondary font-bold uppercase">CURRENT ESCALATION STATE</div>
+<div class="mt-unit-1 font-headline-sm text-headline-sm font-bold text-on-surface">
+                Step 1/5 <span class="font-body-md font-medium text-tertiary">(1.8% Risk — Safe)</span>
+</div>
+<div class="mt-unit-3 flex items-center gap-1">
+<div class="h-2 flex-1 bg-primary border border-on-surface"></div>
+<div class="h-2 flex-1 bg-surface-container-lowest border border-on-surface"></div>
+<div class="h-2 flex-1 bg-surface-container-lowest border border-on-surface"></div>
+<div class="h-2 flex-1 bg-surface-container-lowest border border-on-surface"></div>
+<div class="h-2 flex-1 bg-surface-container-lowest border border-on-surface"></div>
+</div>
+</div>
+<!-- Single Primary Action Button -->
+<div class="mt-unit-6">
+<button class="w-full py-unit-4 px-unit-6 bg-primary-container text-on-primary font-headline-sm text-headline-sm font-bold border-2 border-on-surface custom-hard-shadow-blue flex items-center justify-center gap-unit-3 transition-none select-none tracking-wide" id="sim-trigger-btn" onclick="simulateStep()">
+<span>TRIGGER RISK EVENT</span>
+<span class="material-symbols-outlined font-bold" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Clear Operator Note -->
+<div class="mt-unit-5 p-unit-3 border border-dashed border-on-surface bg-surface-container-low font-code-sm text-code-sm">
+<div class="flex items-start gap-unit-2">
+<span class="material-symbols-outlined text-primary shrink-0 text-base" data-icon="info">info</span>
+<div class="text-on-surface">
+<span class="font-bold">Deterministic single-step progression.</span>
+<div class="text-secondary mt-0.5">Next simulated event: <span class="text-on-surface font-semibold">Volatility Spike (+0.3%)</span>.</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Audit Verification Line -->
+<div class="mt-unit-6 pt-unit-3 border-t border-surface-container-highest text-right font-label-caps text-label-caps text-secondary uppercase">
+            SIMULATOR ENVIRONMENT // ISOLATED SANDBOX
+          </div>
+</section>
+</div>
+<!-- ======================================================================= -->
+<!-- LEDGER TRACE (Institutional Rigor Audit Table)                          -->
+<!-- ======================================================================= -->
+<section class="border-2 border-on-surface bg-surface-container-lowest custom-hard-shadow">
+<div class="bg-surface-container px-unit-5 py-unit-3 border-b-2 border-on-surface flex items-center justify-between">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-unit-2">
+<span>VERIFIED EVALUATION RUNS</span>
+<span class="font-code-sm text-code-sm text-secondary font-normal">(LAST 3 OBSERVATIONS)</span>
+</div>
+<span class="font-label-caps text-label-caps font-mono bg-surface-container-lowest px-unit-2 py-1 border border-on-surface">ZK-SNARK AUDIT PASS</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high border-b-2 border-on-surface font-label-caps text-label-caps text-on-surface uppercase">
+<th class="py-unit-2 px-unit-4 border-r border-surface-container-highest">EPOCH / BLOCK</th>
+<th class="py-unit-2 px-unit-4 border-r border-surface-container-highest">ZK PROOF ROOT</th>
+<th class="py-unit-2 px-unit-4 border-r border-surface-container-highest">INPUT COMMITTED</th>
+<th class="py-unit-2 px-unit-4 border-r border-surface-container-highest">EVALUATOR VERDICT</th>
+<th class="py-unit-2 px-unit-4 text-right">DRIFT COMPLIANCE</th>
+</tr>
+</thead>
+<tbody class="font-code-md text-code-md divide-y divide-surface-container-highest">
+<tr class="hover:bg-surface-container-low transition-none">
+<td class="py-unit-3 px-unit-4 border-r border-surface-container-highest font-mono text-on-surface font-semibold">#19,482,104</td>
+<td class="py-unit-3 px-unit-4 border-r border-surface-container-highest font-mono text-primary">0x9c41...b72a</td>
+<td class="py-unit-3 px-unit-4 border-r border-surface-container-highest text-secondary">Pre-Breach Hash Verified</td>
+<td class="py-unit-3 px-unit-4 border-r border-surface-container-highest">
+<span class="px-unit-2 py-0.5 border border-on-surface bg-[#E6F4EA] text-tertiary font-label-caps text-label-caps font-bold">CLEAR // NORMAL</span>
+</td>
+<td class="py-unit-3 px-unit-4 text-right font-num-table text-num-table font-bold text-on-surface">1.8000%</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-none">
+<td class="py-unit-3 px-unit-4 border-r border-surface-container-highest font-mono text-on-surface font-semibold">#19,482,103</td>
+<td class="py-unit-3 px-unit-4 border-r border-surface-container-highest font-mono text-primary">0x811e...3e01</td>
+<td class="py-unit-3 px-unit-4 border-r border-surface-container-highest text-secondary">Pre-Breach Hash Verified</td>
+<td class="py-unit-3 px-unit-4 border-r border-surface-container-highest">
+<span class="px-unit-2 py-0.5 border border-on-surface bg-[#E6F4EA] text-tertiary font-label-caps text-label-caps font-bold">CLEAR // NORMAL</span>
+</td>
+<td class="py-unit-3 px-unit-4 text-right font-num-table text-num-table font-bold text-on-surface">1.8000%</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-none">
+<td class="py-unit-3 px-unit-4 border-r border-surface-container-highest font-mono text-on-surface font-semibold">#19,482,102</td>
+<td class="py-unit-3 px-unit-4 border-r border-surface-container-highest font-mono text-primary">0x4a00...d8f2</td>
+<td class="py-unit-3 px-unit-4 border-r border-surface-container-highest text-secondary">Initial Escrow Anchored</td>
+<td class="py-unit-3 px-unit-4 border-r border-surface-container-highest">
+<span class="px-unit-2 py-0.5 border border-on-surface bg-[#E6F4EA] text-tertiary font-label-caps text-label-caps font-bold">INITIALIZED</span>
+</td>
+<td class="py-unit-3 px-unit-4 text-right font-num-table text-num-table font-bold text-on-surface">1.8000%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- Lightweight deterministic click feedback script -->
+<script>
+    let step = 1;
+    function simulateStep() {
+      const btn = document.getElementById('sim-trigger-btn');
+      btn.style.transform = 'translate(2px, 2px)';
+      btn.style.boxShadow = '0px 0px 0px #111111';
+      
+      setTimeout(() => {
+        btn.style.transform = '';
+        btn.style.boxShadow = '';
+      }, 150);
+    }
+  </script>
+</body></html>

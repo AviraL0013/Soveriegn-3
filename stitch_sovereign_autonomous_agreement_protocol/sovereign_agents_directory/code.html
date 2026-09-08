@@ -1,0 +1,442 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>SOVEREIGN // Agents Tab</title>
+<!-- Google Fonts: Geist, Inter, JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed": "#1c1b1b",
+            "on-primary-fixed-variant": "#002fc8",
+            "primary": "#0037e4",
+            "on-surface": "#1b1c19",
+            "on-tertiary": "#ffffff",
+            "on-error": "#ffffff",
+            "tertiary-container": "#007950",
+            "surface-tint": "#1e47f3",
+            "background": "#faf9f4",
+            "surface-container-low": "#f5f4ef",
+            "surface-container-high": "#e9e8e3",
+            "secondary-fixed": "#e5e2e1",
+            "surface-container": "#efeee9",
+            "on-error-container": "#93000a",
+            "on-secondary": "#ffffff",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#00105b",
+            "secondary-container": "#e5e2e1",
+            "outline-variant": "#c4c5d9",
+            "surface-container-highest": "#e3e3de",
+            "tertiary-fixed-dim": "#71dba6",
+            "surface-variant": "#e3e3de",
+            "on-tertiary-fixed-variant": "#005235",
+            "on-secondary-fixed-variant": "#474646",
+            "surface-container-lowest": "#ffffff",
+            "error": "#ba1a1a",
+            "on-tertiary-fixed": "#002113",
+            "on-tertiary-container": "#9affca",
+            "on-surface-variant": "#444656",
+            "secondary": "#5f5e5e",
+            "surface": "#faf9f4",
+            "outline": "#747688",
+            "on-primary-container": "#e9e9ff",
+            "on-secondary-container": "#656464",
+            "primary-fixed-dim": "#bac3ff",
+            "on-background": "#1b1c19",
+            "inverse-surface": "#30312e",
+            "error-container": "#ffdad6",
+            "primary-container": "#3155ff",
+            "surface-bright": "#faf9f4",
+            "tertiary-fixed": "#8df7c1",
+            "primary-fixed": "#dee0ff",
+            "tertiary": "#005e3d",
+            "inverse-on-surface": "#f2f1ec",
+            "secondary-fixed-dim": "#c8c6c5",
+            "inverse-primary": "#bac3ff",
+            "surface-dim": "#dbdad5"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "unit-8": "2rem",
+            "unit-2": "0.5rem",
+            "unit-16": "4rem",
+            "unit-1": "0.25rem",
+            "gutter-mobile": "0.75rem",
+            "unit-4": "1rem",
+            "margin-desktop": "2.5rem",
+            "unit-10": "2.5rem",
+            "unit-3": "0.75rem",
+            "unit-5": "1.25rem",
+            "gutter-desktop": "1.25rem",
+            "margin-mobile": "1rem",
+            "unit-6": "1.5rem",
+            "unit-12": "3rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Geist"],
+            "display-lg": ["Geist"],
+            "headline-md": ["Geist"],
+            "body-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-caps": ["JetBrains Mono"],
+            "display-lg-mobile": ["Geist"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Geist"],
+            "code-md": ["JetBrains Mono"],
+            "num-table": ["Inter"],
+            "num-display": ["Inter"],
+            "num-headline": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "headline-lg-mobile": ["Geist"]
+          },
+          "fontSize": {
+            "headline-sm": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+            "headline-md": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+            "label-caps": ["10px", {"lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+            "display-lg-mobile": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+            "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.03em", "fontWeight": "600"}],
+            "code-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+            "num-table": ["13px", {"lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "600"}],
+            "num-display": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+            "num-headline": ["24px", {"lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "code-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-surface-container-low text-on-surface antialiased selection:bg-primary selection:text-white min-h-screen flex flex-col">
+<!-- ========================================================================= -->
+<!-- PREDICTED COMPONENT: SideNavBar (Anchored & ACTIVE on 'Agents')            -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col justify-between bg-surface-container-lowest dark:bg-inverse-surface border-r-2 border-on-surface dark:border-outline-variant shadow-[2px_0px_0px_#1b1c19] dark:shadow-[2px_0px_0px_#c4c5d9] z-40 select-none">
+<!-- Brand Header -->
+<div class="p-unit-5 border-b-2 border-on-surface flex items-start gap-unit-3">
+<div class="w-8 h-8 bg-on-surface text-surface-container-lowest flex items-center justify-center font-code-md text-code-md font-bold shadow-[2px_2px_0px_#0037e4]" title="Sovereign Protocol Geometric S Mark">
+        §
+      </div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface dark:text-inverse-on-surface tracking-tight leading-none">SOVEREIGN</div>
+<div class="font-code-sm text-code-sm text-secondary tracking-widest mt-unit-1">AGREEMENT PROTOCOL</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 py-unit-4 px-unit-3 space-y-1 overflow-y-auto">
+<!-- 0: Overview -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface dark:text-inverse-on-surface hover:bg-surface-container-high dark:hover:bg-surface-variant font-medium font-code-md text-code-md uppercase tracking-wider transition-none" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+<span class="">Overview</span>
+</a>
+<!-- 1: Agreements -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface dark:text-inverse-on-surface hover:bg-surface-container-high dark:hover:bg-surface-variant font-medium font-code-md text-code-md uppercase tracking-wider transition-none" href="#">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+<span class="">Agreements</span>
+</a>
+<!-- 2: Negotiation -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface dark:text-inverse-on-surface hover:bg-surface-container-high dark:hover:bg-surface-variant font-medium font-code-md text-code-md uppercase tracking-wider transition-none" href="#">
+<span class="material-symbols-outlined text-[18px]">handshake</span>
+<span class="">Negotiation</span>
+</a>
+<!-- 3: Monitoring -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface dark:text-inverse-on-surface hover:bg-surface-container-high dark:hover:bg-surface-variant font-medium font-code-md text-code-md uppercase tracking-wider transition-none" href="#">
+<span class="material-symbols-outlined text-[18px]">analytics</span>
+<span class="">Monitoring</span>
+</a>
+<!-- 4: Activity -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface dark:text-inverse-on-surface hover:bg-surface-container-high dark:hover:bg-surface-variant font-medium font-code-md text-code-md uppercase tracking-wider transition-none" href="#">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span class="">Activity</span>
+</a>
+<!-- 5: Agents (ACTIVE) -->
+<a class="flex items-center gap-unit-3 px-unit-4 py-unit-3 bg-on-surface text-surface-container-lowest dark:bg-inverse-on-surface dark:text-inverse-surface font-semibold border border-on-surface translate-x-0.5 translate-y-0.5 font-code-md text-code-md uppercase tracking-wider shadow-[2px_2px_0px_#3155ff]" href="#">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+<span class="">Agents</span>
+</a>
+</nav>
+<!-- SideNav Footer -->
+<div class="p-unit-4 border-t-2 border-on-surface space-y-unit-3 bg-surface-container">
+<div class="flex items-center justify-between border border-on-surface bg-surface-container-lowest px-unit-3 py-unit-2 text-on-surface font-code-sm text-code-sm">
+<span class="flex items-center gap-unit-2">
+<span class="material-symbols-outlined text-[14px] text-tertiary" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span>
+<span class="">Sepolia: Synced</span>
+</span>
+<span class="w-1.5 h-1.5 bg-tertiary rounded-full animate-pulse"></span>
+</div>
+<div class="flex items-center justify-between border border-on-surface bg-surface-container-lowest px-unit-3 py-unit-2 text-on-surface font-code-sm text-code-sm">
+<span class="flex items-center gap-unit-2">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: &quot;FILL&quot; 1;">hub</span>
+<span class="">Arc: Active</span>
+</span>
+<span class="font-label-caps text-label-caps bg-primary text-white px-1">L2</span>
+</div>
+<!-- Signer Authorized CTA Indicator -->
+<div class="mt-unit-2 border-2 border-on-surface bg-surface-container-lowest p-unit-2 flex items-center justify-center gap-unit-2 shadow-[1px_1px_0px_#1b1c19]">
+<span class="inline-block w-2 h-2 bg-[#00875A] border border-on-surface"></span>
+<span class="font-code-sm text-code-sm tracking-wider uppercase font-bold text-on-surface">Signer Authorized</span>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- PREDICTED COMPONENT: TopNavBar                                            -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 left-64 right-0 h-14 flex items-center justify-between px-unit-6 bg-surface-container-low dark:bg-surface-dim border-b-2 border-on-surface dark:border-outline-variant shadow-[0px_2px_0px_#1b1c19] dark:shadow-[0px_2px_0px_#c4c5d9] z-30">
+<div class="flex items-center gap-unit-4">
+<span class="font-label-caps text-label-caps text-on-surface dark:text-inverse-on-surface font-bold uppercase tracking-widest bg-surface-container-high px-unit-2 py-1 border border-on-surface">
+        CONTROL PLANE // v2.4
+      </span>
+<span class="text-secondary font-code-sm text-code-sm hidden md:inline">SYSTEM CONDUIT: ONLINE</span>
+</div>
+<div class="flex items-center gap-unit-3">
+<!-- Trailing Secondary Action: Block telemetry -->
+<div class="hidden sm:flex items-center gap-unit-1 font-code-sm text-code-sm text-on-surface bg-surface-container-lowest border border-on-surface px-unit-3 py-1 shadow-[1px_1px_0px_#1b1c19]">
+<span class="material-symbols-outlined text-[14px]">sync</span>
+<span class="">BLOCK #19,482,104</span>
+</div>
+<!-- Trailing Primary Action: Signer Wallet Key -->
+<div class="flex items-center gap-unit-2 bg-on-surface text-surface-container-lowest px-unit-3 py-1 border border-on-surface font-code-sm text-code-sm shadow-[1px_1px_0px_#3155ff]">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: &quot;FILL&quot; 1;">lock</span>
+<span class="tracking-wider">0x4F92...B9AC</span>
+</div>
+<!-- Key Matrix Profile Avatar -->
+<div class="w-8 h-8 bg-surface-container-high border border-on-surface flex items-center justify-center font-code-sm text-code-sm font-bold shadow-[1px_1px_0px_#1b1c19]" title="Signer Key Matrix">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- MAIN WORKSPACE CANVAS                                                      -->
+<!-- ========================================================================= -->
+<main class="ml-64 mt-14 p-unit-8 flex-1 min-h-[calc(100vh-3.5rem)] flex flex-col items-center">
+<div class="w-full max-w-[1240px] space-y-unit-8 pb-unit-12">
+<!-- Page Header with Subtitle and Signer Status Indicator -->
+<section class="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-on-surface pb-unit-6 gap-unit-4">
+<div>
+<div class="flex items-center gap-unit-3 mb-unit-1">
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface uppercase tracking-tight">Agents</h1>
+<span class="font-label-caps text-label-caps bg-on-surface text-surface-container-lowest px-unit-2 py-0.5 font-bold">STATE: COMPILED</span>
+</div>
+<p class="font-body-md text-body-md text-secondary max-w-2xl">
+            Autonomous economic actors authorized to execute protocol covenants, negotiate interest spreads, and settle programmatic escrow.
+          </p>
+</div>
+<div class="flex items-center gap-unit-4">
+<div class="text-right hidden sm:block">
+<div class="font-label-caps text-label-caps text-secondary uppercase">ENCLAVE ATTESTATION</div>
+<div class="font-code-sm text-code-sm font-bold text-tertiary flex items-center justify-end gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary inline-block animate-ping"></span>
+              ACTIVE &amp; HARDWARE BOUND
+            </div>
+</div>
+<button class="bg-primary-container text-white px-unit-4 py-unit-2 border-[1.5px] border-on-surface shadow-[2px_2px_0px_#1b1c19] hover:shadow-[3px_3px_0px_#1b1c19] active:translate-x-0.5 active:translate-y-0.5 font-code-md text-code-md uppercase font-semibold flex items-center gap-unit-2 transition-none">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+<span class="">Authorize Delegated Agent</span>
+</button>
+</div>
+</section>
+<!-- 1. Top Overview Banner -->
+<section class="border-2 border-on-surface bg-surface-container-lowest p-unit-6 shadow-[2px_2px_0px_#1b1c19]">
+<div class="flex items-center justify-between border-b border-on-surface pb-unit-3 mb-unit-4">
+<div class="flex items-center gap-unit-2">
+<span class="material-symbols-outlined text-primary text-[20px]">verified_user</span>
+<span class="font-label-caps text-label-caps text-on-surface font-bold tracking-widest uppercase">
+              2 REGISTERED AUTONOMOUS ACTORS // CRYPTOGRAPHICALLY DELEGATED
+            </span>
+</div>
+<span class="font-label-caps text-label-caps text-secondary">ATTESTATION SPEC: ERC-7579</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed max-w-4xl">
+          Sovereign protocol agents are deterministic economic actors with bounded execution mandates and zero-knowledge policy commitments. Each entity operates within strict gas stipends, hard-coded collateral constraints, and verifiable multi-party state transitions without intermediary custodial vulnerability.
+        </p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-unit-4 mt-unit-6 pt-unit-4 border-t border-surface-container-high">
+<div>
+<div class="font-label-caps text-label-caps text-secondary uppercase">Cumulative Delegated TVL</div>
+<div class="font-num-headline text-num-headline text-on-surface mt-1 font-bold">$1,520,000.00</div>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-secondary uppercase">Active Bounded Sessions</div>
+<div class="font-num-headline text-num-headline text-on-surface mt-1 font-bold">02 / 02</div>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-secondary uppercase">Total Covenant Actions</div>
+<div class="font-num-headline text-num-headline text-on-surface mt-1 font-bold">14,892 TX</div>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-secondary uppercase">ZK Proof Verification</div>
+<div class="font-num-headline text-num-headline text-tertiary mt-1 font-bold">100% SUCCINCT</div>
+</div>
+</div>
+</section>
+<!-- 2. Two Balanced Actor Profile Panels -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-unit-8">
+<!-- LEFT COLUMN: TREASURY AGENT -->
+<article class="bg-surface-container-lowest border-2 border-on-surface shadow-[2px_2px_0px_#1b1c19] flex flex-col justify-between">
+<div>
+<!-- Card Header Strip -->
+<div class="bg-surface-container border-b-2 border-on-surface px-unit-5 py-unit-3 flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-wider">MANDATE: PROPOSER &amp; ALLOCATOR</span>
+<span class="border border-on-surface px-unit-2 py-0.5 bg-[#E6F4EA] text-[#00875A] font-label-caps text-label-caps font-bold uppercase">
+                [AUTHORIZED SIGNER]
+              </span>
+</div>
+<!-- Profile Overview Header -->
+<div class="p-unit-6 border-b border-on-surface">
+<div class="flex items-start justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-secondary uppercase mb-1">Entity Identifier</div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Treasury Agent</h2>
+<div class="font-code-md text-code-md text-primary font-bold mt-1 flex items-center gap-1">
+<span class="">alice.sovereign.eth</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</div>
+</div>
+<div class="w-12 h-12 border-2 border-on-surface bg-surface-container flex items-center justify-center font-headline-sm text-headline-sm font-bold shadow-[2px_2px_0px_#1b1c19]">
+                  TA
+                </div>
+</div>
+</div>
+<!-- Detailed Telemetry Ledger -->
+<div class="p-unit-6 space-y-unit-4">
+<!-- Item 1: Delegation Contract -->
+<div class="flex items-center justify-between border-b border-surface-container-high pb-unit-3">
+<span class="font-body-sm text-body-sm text-secondary uppercase font-medium">Delegation Contract</span>
+<span class="font-code-md text-code-md text-on-surface bg-surface-container px-unit-2 py-0.5 border border-on-surface font-semibold">0x82a9...91fd</span>
+</div>
+<!-- Item 2: Current Role -->
+<div class="flex items-center justify-between border-b border-surface-container-high pb-unit-3">
+<span class="font-body-sm text-body-sm text-secondary uppercase font-medium">Current Role</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">Proposer / Capital Allocator</span>
+</div>
+<!-- Item 3: Managed Capital Pool -->
+<div class="flex items-center justify-between border-b border-surface-container-high pb-unit-3">
+<span class="font-body-sm text-body-sm text-secondary uppercase font-medium">Managed Capital Pool</span>
+<span class="font-num-headline text-num-headline text-on-surface font-bold">$1,420,000.00 USDC</span>
+</div>
+<!-- Item 4: Active Agreement -->
+<div class="flex items-center justify-between border-b border-surface-container-high pb-unit-3">
+<span class="font-body-sm text-body-sm text-secondary uppercase font-medium">Active Agreement</span>
+<span class="font-code-md text-code-md text-primary font-bold">#SOV-8F29 ($100,000 USDC)</span>
+</div>
+<!-- Item 5: Policy Specification -->
+<div class="flex items-center justify-between border-b border-surface-container-high pb-unit-3">
+<span class="font-body-sm text-body-sm text-secondary uppercase font-medium">Policy Specification</span>
+<span class="font-code-sm text-code-sm bg-surface-container px-unit-2 py-1 border border-on-surface text-on-surface font-bold flex items-center gap-1">
+<span class="">🔒</span>
+<span class="">CONFIDENTIAL (ZK-SNARK BOUNDED)</span>
+</span>
+</div>
+<!-- Item 6: Hardware Key -->
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-secondary uppercase font-medium">Hardware Key</span>
+<span class="font-code-md text-code-md text-on-surface font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">memory</span>
+<span class="">Secp256k1 / Ledger Enterprise</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Card Action Execution Strip -->
+<div class="p-unit-6 pt-0">
+<button class="w-full bg-surface-container-lowest text-on-surface border-[1.5px] border-on-surface p-unit-3 shadow-[2px_2px_0px_#1b1c19] hover:bg-surface-container-low hover:shadow-[3px_3px_0px_#1b1c19] active:translate-x-0.5 active:translate-y-0.5 font-code-md text-code-md uppercase font-bold flex items-center justify-center gap-unit-2 transition-none">
+<span class="">INSPECT MANDATE</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- RIGHT COLUMN: STRATEGY AGENT -->
+<article class="bg-surface-container-lowest border-2 border-on-surface shadow-[2px_2px_0px_#1b1c19] flex flex-col justify-between">
+<div>
+<!-- Card Header Strip -->
+<div class="bg-surface-container border-b-2 border-on-surface px-unit-5 py-unit-3 flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-wider">MANDATE: EXECUTION &amp; SETTLEMENT</span>
+<span class="border border-on-surface px-unit-2 py-0.5 bg-[#E6F4EA] text-[#00875A] font-label-caps text-label-caps font-bold uppercase">
+                [AUTHORIZED SIGNER]
+              </span>
+</div>
+<!-- Profile Overview Header -->
+<div class="p-unit-6 border-b border-on-surface">
+<div class="flex items-start justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-secondary uppercase mb-1">Entity Identifier</div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Strategy Agent</h2>
+<div class="font-code-md text-code-md text-primary font-bold mt-1 flex items-center gap-1">
+<span class="">bob.sovereign.eth</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</div>
+</div>
+<div class="w-12 h-12 border-2 border-on-surface bg-surface-container flex items-center justify-center font-headline-sm text-headline-sm font-bold shadow-[2px_2px_0px_#1b1c19]">
+                  SA
+                </div>
+</div>
+</div>
+<!-- Detailed Telemetry Ledger -->
+<div class="p-unit-6 space-y-unit-4">
+<!-- Item 1: Delegation Contract -->
+<div class="flex items-center justify-between border-b border-surface-container-high pb-unit-3">
+<span class="font-body-sm text-body-sm text-secondary uppercase font-medium">Delegation Contract</span>
+<span class="font-code-md text-code-md text-on-surface bg-surface-container px-unit-2 py-0.5 border border-on-surface font-semibold">0x51d2...87ab</span>
+</div>
+<!-- Item 2: Current Role -->
+<div class="flex items-center justify-between border-b border-surface-container-high pb-unit-3">
+<span class="font-body-sm text-body-sm text-secondary uppercase font-medium">Current Role</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">Counterparty / Execution Engine</span>
+</div>
+<!-- Item 3: Strategy Type -->
+<div class="flex items-center justify-between border-b border-surface-container-high pb-unit-3">
+<span class="font-body-sm text-body-sm text-secondary uppercase font-medium">Strategy Type</span>
+<span class="font-code-md text-code-md text-on-surface font-bold">Delta-Neutral Yield Arbitrage</span>
+</div>
+<!-- Item 4: Active Agreement -->
+<div class="flex items-center justify-between border-b border-surface-container-high pb-unit-3">
+<span class="font-body-sm text-body-sm text-secondary uppercase font-medium">Active Agreement</span>
+<span class="font-code-md text-code-md text-primary font-bold">#SOV-8F29 ($100,000 USDC)</span>
+</div>
+<!-- Item 5: Execution Script Hash -->
+<div class="flex items-center justify-between border-b border-surface-container-high pb-unit-3">
+<span class="font-body-sm text-body-sm text-secondary uppercase font-medium">Execution Script Hash</span>
+<span class="font-code-md text-code-md text-on-surface bg-surface-container px-unit-2 py-0.5 border border-on-surface font-semibold">0x39a1c...99fe</span>
+</div>
+<!-- Item 6: Hardware Key -->
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-secondary uppercase font-medium">Hardware Key</span>
+<span class="font-code-md text-code-md text-on-surface font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">shield</span>
+<span class="">Hardware Enclave / TEE Verified</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Card Action Execution Strip -->
+<div class="p-unit-6 pt-0">
+<button class="w-full bg-surface-container-lowest text-on-surface border-[1.5px] border-on-surface p-unit-3 shadow-[2px_2px_0px_#1b1c19] hover:bg-surface-container-low hover:shadow-[3px_3px_0px_#1b1c19] active:translate-x-0.5 active:translate-y-0.5 font-code-md text-code-md uppercase font-bold flex items-center justify-center gap-unit-2 transition-none">
+<span class="">INSPECT RUNTIME</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+</section>
+<!-- 3. Cryptographic Governance & Delegation Ledger -->
+
+</div>
+</main>
+</body></html>

@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sovereign Autonomous Financial Agreement Protocol — Control Plane</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-tint": "#1e47f3",
+            "on-primary": "#ffffff",
+            "surface-dim": "#dbdad5",
+            "on-secondary-fixed": "#1c1b1b",
+            "inverse-on-surface": "#f2f1ec",
+            "on-tertiary-fixed-variant": "#005235",
+            "surface-container-high": "#e9e8e3",
+            "secondary": "#5f5e5e",
+            "secondary-fixed-dim": "#c8c6c5",
+            "on-secondary-fixed-variant": "#474646",
+            "primary-fixed": "#dee0ff",
+            "primary": "#0037e4",
+            "on-tertiary-container": "#9affca",
+            "surface-container-low": "#f5f4ef",
+            "tertiary-fixed": "#8df7c1",
+            "on-secondary-container": "#656464",
+            "on-error-container": "#93000a",
+            "on-surface": "#1b1c19",
+            "primary-fixed-dim": "#bac3ff",
+            "outline-variant": "#c4c5d9",
+            "surface-container-lowest": "#ffffff",
+            "secondary-container": "#e5e2e1",
+            "tertiary-fixed-dim": "#71dba6",
+            "on-error": "#ffffff",
+            "surface": "#faf9f4",
+            "on-primary-fixed-variant": "#002fc8",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#30312e",
+            "on-surface-variant": "#444656",
+            "background": "#faf9f4",
+            "primary-container": "#3155ff",
+            "on-background": "#1b1c19",
+            "outline": "#747688",
+            "on-tertiary-fixed": "#002113",
+            "tertiary-container": "#007950",
+            "on-tertiary": "#ffffff",
+            "tertiary": "#005e3d",
+            "on-primary-container": "#e9e9ff",
+            "inverse-primary": "#bac3ff",
+            "on-primary-fixed": "#00105b",
+            "surface-container-highest": "#e3e3de",
+            "surface-bright": "#faf9f4",
+            "error": "#ba1a1a",
+            "secondary-fixed": "#e5e2e1",
+            "surface-container": "#efeee9",
+            "error-container": "#ffdad6",
+            "surface-variant": "#e3e3de"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "unit-3": "0.75rem",
+            "gutter-desktop": "1.25rem",
+            "gutter-mobile": "0.75rem",
+            "margin-mobile": "1rem",
+            "unit-16": "4rem",
+            "unit-8": "2rem",
+            "unit-1": "0.25rem",
+            "margin-desktop": "2.5rem",
+            "unit-5": "1.25rem",
+            "unit-4": "1rem",
+            "unit-12": "3rem",
+            "unit-6": "1.5rem",
+            "unit-10": "2.5rem",
+            "unit-2": "0.5rem"
+          },
+          "fontFamily": {
+            "num-display": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "headline-lg-mobile": ["Geist"],
+            "headline-md": ["Geist"],
+            "headline-sm": ["Geist"],
+            "code-md": ["JetBrains Mono"],
+            "headline-lg": ["Geist"],
+            "num-table": ["Inter"],
+            "body-sm": ["Inter"],
+            "num-headline": ["Inter"],
+            "body-md": ["Inter"],
+            "display-lg": ["Geist"],
+            "label-caps": ["JetBrains Mono"],
+            "display-lg-mobile": ["Geist"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "num-display": ["36px", { "lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "code-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "code-md": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "headline-lg": ["32px", { "lineHeight": "38px", "letterSpacing": "-0.03em", "fontWeight": "600" }],
+            "num-table": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "num-headline": ["24px", { "lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "display-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+            "label-caps": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "38px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .neo-shadow {
+      box-shadow: 2px 2px 0px #1b1c19;
+    }
+    .neo-shadow-lg {
+      box-shadow: 4px 4px 0px #1b1c19;
+    }
+    .neo-shadow-hover:hover {
+      box-shadow: 3px 3px 0px #1b1c19;
+      transform: translate(-1px, -1px);
+    }
+    .neo-press:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0px 0px 0px #1b1c19;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen font-body-md selection:bg-primary-container selection:text-on-primary">
+<!-- FIXED LEFT SIDEBAR (Shared Component Implementation) -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col justify-between bg-surface-container-lowest border-r-2 border-on-surface shadow-[2px_0px_0px_#1b1c19] z-40">
+<div class="flex flex-col">
+<!-- Brand Header -->
+<div class="p-unit-4 border-b-2 border-on-surface bg-surface-container-low flex items-center gap-unit-3">
+<div class="w-10 h-10 bg-on-surface text-surface-container-lowest flex items-center justify-center border-2 border-on-surface shadow-[1px_1px_0px_#1b1c19]">
+<span class="font-code-md text-code-md font-bold">SOV</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface tracking-tight">SOVEREIGN</div>
+<div class="font-label-caps text-label-caps text-secondary uppercase tracking-wider">AGREEMENT PROTOCOL</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="p-unit-3 flex flex-col gap-unit-2" id="sidebar-nav">
+<button class="nav-item flex items-center gap-unit-3 px-unit-4 py-unit-3 bg-on-surface text-surface-container-lowest font-code-md text-code-md uppercase tracking-wider font-semibold border border-on-surface translate-x-0.5 translate-y-0.5 text-left w-full transition-none" data-tab="overview" onclick="switchTab('overview')">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</button>
+<button class="nav-item flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container-high font-code-md text-code-md uppercase tracking-wider font-medium text-left w-full transition-none" data-tab="agreements" onclick="switchTab('agreements')">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span>Agreements</span>
+</button>
+<button class="nav-item flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container-high font-code-md text-code-md uppercase tracking-wider font-medium text-left w-full transition-none" data-tab="negotiation" onclick="switchTab('negotiation')">
+<span class="material-symbols-outlined" data-icon="handshake">handshake</span>
+<span>Negotiation</span>
+</button>
+<button class="nav-item flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container-high font-code-md text-code-md uppercase tracking-wider font-medium text-left w-full transition-none" data-tab="monitoring" onclick="switchTab('monitoring')">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Monitoring</span>
+</button>
+<button class="nav-item flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container-high font-code-md text-code-md uppercase tracking-wider font-medium text-left w-full transition-none" data-tab="create-intent" onclick="switchTab('create-intent')">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span>Create Intent</span>
+</button>
+<button class="nav-item flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container-high font-code-md text-code-md uppercase tracking-wider font-medium text-left w-full transition-none" data-tab="activity" onclick="switchTab('activity')">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span>Activity</span>
+</button>
+<button class="nav-item flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container-high font-code-md text-code-md uppercase tracking-wider font-medium text-left w-full transition-none" data-tab="agents" onclick="switchTab('agents')">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span>Agents</span>
+</button>
+</nav>
+</div>
+<!-- Sidebar Footer Telemetry -->
+<div class="p-unit-3 border-t-2 border-on-surface bg-surface-container-low flex flex-col gap-unit-2">
+<div class="flex items-center justify-between text-on-surface px-unit-2 py-unit-1 border border-on-surface bg-surface-container-lowest neo-shadow font-code-sm text-code-sm">
+<span class="flex items-center gap-unit-1">
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="check_circle">check_circle</span>
+<span>Sepolia: Synced</span>
+</span>
+<span class="font-bold">#19,482,104</span>
+</div>
+<div class="flex items-center justify-between text-on-surface px-unit-2 py-unit-1 border border-on-surface bg-surface-container-lowest neo-shadow font-code-sm text-code-sm">
+<span class="flex items-center gap-unit-1">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="hub">hub</span>
+<span>Arc: Active</span>
+</span>
+<span class="font-bold text-tertiary">ESCROW READY</span>
+</div>
+<div class="mt-unit-1 p-unit-2 bg-surface-container border border-on-surface text-on-surface">
+<div class="font-label-caps text-label-caps text-secondary uppercase">Signer Authorized</div>
+<div class="font-code-sm text-code-sm font-bold truncate">0x4F92...B9AC</div>
+</div>
+</div>
+</aside>
+<!-- TOP CONTROL PLANE BAR -->
+<header class="fixed top-0 left-64 right-0 h-14 bg-surface-container-low border-b-2 border-on-surface shadow-[0px_2px_0px_#1b1c19] flex items-center justify-between px-unit-6 z-30">
+<div class="flex items-center gap-unit-4">
+<div class="font-label-caps text-label-caps text-on-surface font-bold uppercase tracking-widest flex items-center gap-unit-2">
+<span class="w-2 h-2 bg-tertiary inline-block"></span>
+        CONTROL PLANE // v2.4
+      </div>
+<div class="h-4 w-px bg-outline-variant"></div>
+<div class="font-code-sm text-code-sm text-secondary flex items-center gap-unit-2">
+<span>SOVEREIGN PRIVATE POLICY VM</span>
+<span class="px-unit-2 py-0.5 bg-surface-container-high text-on-surface font-semibold border border-on-surface text-[10px]">VERIFIED ZERO-KNOWLEDGE</span>
+</div>
+</div>
+<div class="flex items-center gap-unit-4">
+<div class="flex items-center gap-unit-2 font-code-sm text-code-sm">
+<span class="px-unit-2 py-1 bg-surface-container-lowest border border-on-surface neo-shadow font-bold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span> SEPOLIA
+        </span>
+<span class="px-unit-2 py-1 bg-surface-container-lowest border border-on-surface neo-shadow font-bold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-blue-600"></span> ARC ESCROW
+        </span>
+</div>
+<div class="flex items-center gap-unit-2">
+<button class="w-8 h-8 flex items-center justify-center border border-on-surface bg-surface-container-lowest neo-shadow neo-press hover:bg-surface-container" title="Block Lock State">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center border border-on-surface bg-surface-container-lowest neo-shadow neo-press hover:bg-surface-container" title="Sync Telemetry">
+<span class="material-symbols-outlined text-sm" data-icon="sync">sync</span>
+</button>
+</div>
+<div class="flex items-center gap-unit-2 border-2 border-on-surface bg-on-surface text-surface-container-lowest px-unit-3 py-1 font-code-sm text-code-sm font-bold neo-shadow">
+<span>0x4F92...B9AC</span>
+</div>
+</div>
+</header>
+<!-- MAIN VIEWPORT CONTAINER -->
+<main class="ml-64 pt-14 min-h-screen p-unit-8 max-w-7xl">
+<!-- ========================================== -->
+<!-- TAB 1: OVERVIEW & AGREEMENTS SUMMARY (DEFAULT) -->
+<!-- ========================================== -->
+<div class="tab-content active space-y-unit-6" id="tab-overview">
+<!-- Top Title & Network Meta -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-unit-4 pb-unit-4 border-b-2 border-on-surface">
+<div>
+<div class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-widest mb-unit-1">ARCHIVAL EXECUTION SUITE</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Autonomous agreements, enforced privately.</h1>
+<p class="font-body-md text-body-md text-secondary mt-1">Real-time machine-to-machine financial covenants backed by cryptographic policy commitments and Arc Escrow.</p>
+</div>
+<div class="flex items-center gap-unit-2">
+<span class="px-unit-3 py-1 bg-surface-container-lowest border-2 border-on-surface neo-shadow font-code-sm text-code-sm font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 bg-tertiary"></span> SEPOLIA // SETTLEMENT
+          </span>
+<span class="px-unit-3 py-1 bg-surface-container-lowest border-2 border-on-surface neo-shadow font-code-sm text-code-sm font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 bg-primary-container"></span> ARC // ESCROW ENGINE
+          </span>
+</div>
+</div>
+<!-- Hero Telemetry neo-brutalist Panel -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-unit-6">
+<div class="border-r-0 md:border-r-2 border-on-surface md:pr-unit-4">
+<div class="font-label-caps text-label-caps text-secondary uppercase mb-unit-1">Total Active Capital</div>
+<div class="font-num-display text-num-display font-bold text-on-surface tracking-tight">$100,000 <span class="font-code-md text-code-md text-secondary font-normal">USDC</span></div>
+<div class="mt-2 text-xs font-code-sm text-tertiary font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="verified_user">verified_user</span> ARC ESCROW CAPITAL LOCKED
+            </div>
+</div>
+<div class="border-r-0 md:border-r-2 border-on-surface md:pr-unit-4">
+<div class="font-label-caps text-label-caps text-secondary uppercase mb-unit-1">Agreements Under Execution</div>
+<div class="font-num-display text-num-display font-bold text-on-surface tracking-tight">1 <span class="font-code-md text-code-md text-secondary font-normal">ACTIVE</span></div>
+<div class="mt-2 text-xs font-code-sm text-secondary font-bold">2 AUTONOMOUS AGENTS ENGAGED</div>
+</div>
+<div class="border-r-0 md:border-r-2 border-on-surface md:pr-unit-4">
+<div class="font-label-caps text-label-caps text-secondary uppercase mb-unit-1">Weighted Target Yield</div>
+<div class="font-num-display text-num-display font-bold text-primary tracking-tight">8.40% <span class="font-code-md text-code-md text-secondary font-normal">APR</span></div>
+<div class="mt-2 text-xs font-code-sm text-on-surface font-semibold">25 DAYS MATURITY HORIZON</div>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-secondary uppercase mb-unit-1">Protocol Protocol Security</div>
+<div class="font-num-headline text-num-headline font-bold text-tertiary tracking-tight">100% SOLVENT</div>
+<div class="mt-2 flex items-center gap-1 text-xs font-code-sm text-secondary">
+<span>ZERO BREACH / NO LIQUIDATION</span>
+</div>
+</div>
+</div>
+<!-- Macro Pipeline Strip -->
+<div class="mt-unit-6 pt-unit-4 border-t border-on-surface flex flex-col md:flex-row items-center justify-between gap-unit-2 text-xs font-code-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-on-surface"></span>
+<span class="font-bold uppercase">Lifecycle Track:</span>
+</div>
+<div class="flex items-center gap-unit-2 flex-wrap">
+<span class="px-2 py-0.5 bg-surface-container-high border border-on-surface text-on-surface font-semibold">01. INTENT COMMITTED</span>
+<span class="text-secondary">→</span>
+<span class="px-2 py-0.5 bg-surface-container-high border border-on-surface text-on-surface font-semibold">02. M2M NEGOTIATED</span>
+<span class="text-secondary">→</span>
+<span class="px-2 py-0.5 bg-surface-container-high border border-on-surface text-on-surface font-semibold">03. ZK POLICY VERIFIED</span>
+<span class="text-secondary">→</span>
+<span class="px-2 py-0.5 bg-tertiary text-on-tertiary border border-on-surface font-bold">04. ESCROW LOCKED (ACTIVE)</span>
+</div>
+</div>
+</div>
+<!-- ACTIVE AGREEMENT CARD (#SOV-8F29) -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow">
+<!-- Header Banner -->
+<div class="bg-surface-container-high border-b-2 border-on-surface p-unit-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-unit-2">
+<div class="flex items-center gap-unit-3">
+<div class="w-8 h-8 bg-on-surface text-surface-container-lowest flex items-center justify-center font-code-md font-bold text-sm">
+              #
+            </div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-unit-2">
+                AGREEMENT #SOV-8F29
+                <span class="text-xs px-unit-2 py-0.5 bg-emerald-100 text-emerald-800 border border-on-surface font-code-sm font-bold uppercase">ACTIVE (EMERALD)</span>
+<span class="text-xs px-unit-2 py-0.5 bg-surface-container-lowest text-on-surface border border-on-surface font-code-sm font-bold uppercase">ARC ESCROW LOCKED</span>
+</div>
+<div class="font-code-sm text-code-sm text-secondary">Settlement Contract: 0x981F...00DC • Arc Channel: sov-escrow-main-4</div>
+</div>
+</div>
+<div class="flex items-center gap-unit-2">
+<button class="px-unit-4 py-unit-2 bg-primary-container text-on-primary font-bold border-2 border-on-surface neo-shadow neo-press hover:bg-primary text-xs flex items-center gap-1 font-code-sm tracking-wider uppercase" onclick="switchTab('monitoring')">
+<span class="material-symbols-outlined text-xs" data-icon="play_arrow">play_arrow</span> Open Simulation & Breach Test
+            </button>
+</div>
+</div>
+<!-- Content Body -->
+<div class="p-unit-6 space-y-unit-6">
+<!-- Counterparty Agents Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-unit-4">
+<div class="p-unit-4 bg-surface-container border border-on-surface neo-shadow">
+<div class="flex items-center justify-between mb-unit-2">
+<span class="font-label-caps text-label-caps text-secondary uppercase font-bold">Party A (Lender & Vault)</span>
+<span class="font-code-sm text-code-sm bg-surface-container-lowest px-unit-2 py-0.5 border border-on-surface font-bold text-tertiary">SIGNER VERIFIED</span>
+</div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">treasury.sovereign.eth</div>
+<div class="font-code-sm text-code-sm text-secondary mt-1">0x82a9...91fd • Delegation Cap: $500,000 USDC</div>
+<div class="mt-unit-2 text-xs font-code-sm text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="lock">lock</span> Confidential Treasury Risk Policy Encrypted
+              </div>
+</div>
+<div class="p-unit-4 bg-surface-container border border-on-surface neo-shadow">
+<div class="flex items-center justify-between mb-unit-2">
+<span class="font-label-caps text-label-caps text-secondary uppercase font-bold">Party B (Strategy Execution)</span>
+<span class="font-code-sm text-code-sm bg-surface-container-lowest px-unit-2 py-0.5 border border-on-surface font-bold text-tertiary">SIGNER VERIFIED</span>
+</div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">strategy.sovereign.eth</div>
+<div class="font-code-sm text-code-sm text-secondary mt-1">0x51d2...87ab • Yield Arb Engine v4</div>
+<div class="mt-unit-2 text-xs font-code-sm text-secondary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="memory">memory</span> Autonomous Execution Script Hash #90FA
+              </div>
+</div>
+</div>
+<!-- Structured Term Ledger -->
+<div class="border border-on-surface bg-surface-container-lowest">
+<div class="bg-surface-container-high border-b border-on-surface px-unit-4 py-unit-2 flex items-center justify-between font-label-caps text-label-caps uppercase text-secondary">
+<span>BINDING TRANSACTIONAL PARAMETERS</span>
+<span>FINALITY: BLOCK #19,482,098</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 divide-x divide-y sm:divide-y-0 divide-on-surface text-center">
+<div class="p-unit-4">
+<div class="font-label-caps text-label-caps text-secondary uppercase">Committed Principal</div>
+<div class="font-num-headline text-num-headline font-bold text-on-surface mt-1">$100,000.00</div>
+<div class="text-xs font-code-sm text-secondary">USDC (ERC-20)</div>
+</div>
+<div class="p-unit-4">
+<div class="font-label-caps text-label-caps text-secondary uppercase">Agreed Fixed Yield</div>
+<div class="font-num-headline text-num-headline font-bold text-primary mt-1">8.40%</div>
+<div class="text-xs font-code-sm text-secondary">Accrued Per Second</div>
+</div>
+<div class="p-unit-4">
+<div class="font-label-caps text-label-caps text-secondary uppercase">Duration Limit</div>
+<div class="font-num-headline text-num-headline font-bold text-on-surface mt-1">25 DAYS</div>
+<div class="text-xs font-code-sm text-secondary">Expiry: 12 Nov 2025</div>
+</div>
+<div class="p-unit-4">
+<div class="font-label-caps text-label-caps text-secondary uppercase">Live Risk State</div>
+<div class="font-num-headline text-num-headline font-bold text-tertiary mt-1" id="overview-risk-tag">1.8% / SAFE</div>
+<div class="text-xs font-code-sm text-secondary">Off-chain Evaluator</div>
+</div>
+</div>
+</div>
+<!-- Cryptographic Proof Snippet Strip -->
+<div class="p-unit-4 bg-surface-container border border-dashed border-on-surface flex flex-col md:flex-row items-start md:items-center justify-between gap-unit-3 text-xs font-code-sm">
+<div class="space-y-1">
+<div class="flex items-center gap-unit-2">
+<span class="font-bold uppercase text-secondary">Terms Hash:</span>
+<span class="bg-surface-container-lowest px-unit-2 py-0.5 border border-on-surface font-bold select-all">0x8f29ea100b9ca72cf017c6e00b84912903fe92</span>
+</div>
+<div class="flex items-center gap-unit-2">
+<span class="font-bold uppercase text-secondary">Policy Commitment:</span>
+<span class="bg-surface-container-lowest px-unit-2 py-0.5 border border-on-surface font-bold select-all">0x71c4801fbde9e11504936d8193aef49204bc99</span>
+<span class="px-unit-2 py-0.5 bg-primary-fixed text-on-primary-fixed font-bold border border-on-surface text-[10px]">CONFIDENTIAL POLICY PROTECTED</span>
+</div>
+</div>
+<button class="px-unit-3 py-unit-1.5 bg-surface-container-lowest border border-on-surface neo-shadow neo-press font-bold hover:bg-surface-container-high text-xs font-code-sm flex items-center gap-1" onclick="switchTab('monitoring')">
+<span class="material-symbols-outlined text-xs" data-icon="verified">verified</span> Inspect Proofs & Breaches
+            </button>
+</div>
+</div>
+</div>
+<!-- RECENT AUDIT TIMELINE TABLE -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow">
+<div class="bg-surface-container-high border-b-2 border-on-surface px-unit-4 py-unit-3 flex items-center justify-between">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-unit-2">
+<span class="material-symbols-outlined text-base" data-icon="receipt_long">receipt_long</span>
+            PROTOCOL EXECUTION LEDGER // RECENT EVENTS
+          </div>
+<span class="font-code-sm text-code-sm text-secondary font-bold">ALL PROOFS ANCHORED ON SEPOLIA</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container border-b-2 border-on-surface font-label-caps text-label-caps text-secondary uppercase">
+<th class="p-unit-3">TX HASH</th>
+<th class="p-unit-3">TIME</th>
+<th class="p-unit-3">ACTION EVENT</th>
+<th class="p-unit-3">ACTOR</th>
+<th class="p-unit-3">NETWORK</th>
+<th class="p-unit-3 text-right">STATUS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant font-code-sm text-code-sm">
+<tr class="hover:bg-surface border-l-2 border-transparent hover:border-primary">
+<td class="p-unit-3 font-bold">0x4a19...99ca</td>
+<td class="p-unit-3 text-secondary">10 mins ago</td>
+<td class="p-unit-3 font-semibold">Arc Escrow Capital Locked ($100,000 USDC)</td>
+<td class="p-unit-3">Arc Escrow Core</td>
+<td class="p-unit-3"><span class="px-unit-2 py-0.5 bg-blue-100 text-blue-900 border border-on-surface text-[10px] font-bold">ARC</span></td>
+<td class="p-unit-3 text-right"><span class="px-unit-2 py-0.5 bg-emerald-100 text-emerald-800 border border-on-surface text-[10px] font-bold">CONFIRMED</span></td>
+</tr>
+<tr class="hover:bg-surface border-l-2 border-transparent hover:border-primary">
+<td class="p-unit-3 font-bold">0x81d2...a43b</td>
+<td class="p-unit-3 text-secondary">14 mins ago</td>
+<td class="p-unit-3 font-semibold">Agreement Registry Validation Accepted (#SOV-8F29)</td>
+<td class="p-unit-3">Sovereign Registry</td>
+<td class="p-unit-3"><span class="px-unit-2 py-0.5 bg-gray-100 text-gray-900 border border-on-surface text-[10px] font-bold">SEPOLIA</span></td>
+<td class="p-unit-3 text-right"><span class="px-unit-2 py-0.5 bg-emerald-100 text-emerald-800 border border-on-surface text-[10px] font-bold">CONFIRMED</span></td>
+</tr>
+<tr class="hover:bg-surface border-l-2 border-transparent hover:border-primary">
+<td class="p-unit-3 font-bold">0x992b...e041</td>
+<td class="p-unit-3 text-secondary">22 mins ago</td>
+<td class="p-unit-3 font-semibold">Strategy Agent Offer Accepted (Convergence reached)</td>
+<td class="p-unit-3">strategy.sovereign.eth</td>
+<td class="p-unit-3"><span class="px-unit-2 py-0.5 bg-gray-100 text-gray-900 border border-on-surface text-[10px] font-bold">SEPOLIA</span></td>
+<td class="p-unit-3 text-right"><span class="px-unit-2 py-0.5 bg-emerald-100 text-emerald-800 border border-on-surface text-[10px] font-bold">FINALIZED</span></td>
+</tr>
+<tr class="hover:bg-surface border-l-2 border-transparent hover:border-primary">
+<td class="p-unit-3 font-bold">0x12c8...7710</td>
+<td class="p-unit-3 text-secondary">31 mins ago</td>
+<td class="p-unit-3 font-semibold">Treasury Counter-Offer Submitted (8.40% Yield / 25d)</td>
+<td class="p-unit-3">treasury.sovereign.eth</td>
+<td class="p-unit-3"><span class="px-unit-2 py-0.5 bg-gray-100 text-gray-900 border border-on-surface text-[10px] font-bold">SEPOLIA</span></td>
+<td class="p-unit-3 text-right"><span class="px-unit-2 py-0.5 bg-emerald-100 text-emerald-800 border border-on-surface text-[10px] font-bold">SETTLED</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- TAB 2: M2M NEGOTIATION VIEW (HERO SCREEN) -->
+<!-- ========================================== -->
+<div class="tab-content space-y-unit-6" id="tab-negotiation">
+<!-- Top Title & Architecture Banner -->
+<div class="border-b-2 border-on-surface pb-unit-4 flex flex-col md:flex-row md:items-center justify-between gap-unit-3">
+<div>
+<div class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-widest mb-unit-1">PROTOCOL NEGOTIATION MATRIX</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Machine-to-Machine Economic Convergence</h1>
+<p class="font-body-md text-body-md text-secondary">Autonomous cryptographic agents negotiating financial contract terms within private policy bounds.</p>
+</div>
+<div class="flex items-center gap-unit-2">
+<span class="px-unit-3 py-1 bg-tertiary text-on-tertiary font-code-sm text-code-sm font-bold border-2 border-on-surface neo-shadow">
+            STATE: CONVERGED & SIGNED
+          </span>
+</div>
+</div>
+<!-- AGENT IDENTITY PAIRING BAR -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-unit-6">
+<!-- Treasury Agent Card -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-4 relative">
+<div class="absolute top-unit-2 right-unit-2 px-unit-2 py-0.5 bg-surface-container border border-on-surface font-code-sm text-[10px] font-bold text-on-surface">
+            INITIATOR / ALLOCATOR
+          </div>
+<div class="flex items-center gap-unit-3">
+<div class="w-10 h-10 bg-on-surface text-surface-container-lowest flex items-center justify-center font-bold text-base">
+              TA
+            </div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">treasury.sovereign.eth</div>
+<div class="font-code-sm text-code-sm text-secondary">0x82a9482...91fd • Signer: AUTHORIZED</div>
+</div>
+</div>
+<div class="mt-unit-3 pt-unit-3 border-t border-on-surface grid grid-cols-2 gap-unit-2 text-xs font-code-sm">
+<div>
+<span class="text-secondary font-medium">CAPITAL ALLOCATION:</span>
+<div class="font-bold text-on-surface">$100,000 USDC</div>
+</div>
+<div>
+<span class="text-secondary font-medium">POLICY CONFIDENTIALITY:</span>
+<div class="font-bold text-tertiary">PRIVATE & ENCRYPTED (ZK)</div>
+</div>
+</div>
+</div>
+<!-- Strategy Agent Card -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-4 relative">
+<div class="absolute top-unit-2 right-unit-2 px-unit-2 py-0.5 bg-surface-container border border-on-surface font-code-sm text-[10px] font-bold text-on-surface">
+            COUNTERPARTY / EXECUTOR
+          </div>
+<div class="flex items-center gap-unit-3">
+<div class="w-10 h-10 bg-primary-container text-on-primary flex items-center justify-center font-bold text-base">
+              SA
+            </div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">strategy.sovereign.eth</div>
+<div class="font-code-sm text-code-sm text-secondary">0x51d2e11...87ab • Signer: AUTHORIZED</div>
+</div>
+</div>
+<div class="mt-unit-3 pt-unit-3 border-t border-on-surface grid grid-cols-2 gap-unit-2 text-xs font-code-sm">
+<div>
+<span class="text-secondary font-medium">STRATEGY ALGORITHM:</span>
+<div class="font-bold text-on-surface">Yield Arb v4 (Delta-Neutral)</div>
+</div>
+<div>
+<span class="text-secondary font-medium">COLLATERAL ESCROW:</span>
+<div class="font-bold text-primary">ARC SMART ESCROW v1</div>
+</div>
+</div>
+</div>
+</div>
+<!-- CHRONOLOGICAL NEGOTIATION FEED -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow">
+<div class="bg-surface-container-high border-b-2 border-on-surface px-unit-4 py-unit-3 flex items-center justify-between">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-unit-2">
+<span class="material-symbols-outlined text-base" data-icon="compare_arrows">compare_arrows</span>
+            PROTOCOL ROUNDS LOG // 4 ROUND CONVERGENCE
+          </div>
+<span class="font-code-sm text-code-sm text-secondary">FORMAT: ARCHIVAL TELEMETRY</span>
+</div>
+<div class="p-unit-6 space-y-unit-4">
+<!-- ROUND 01 -->
+<div class="border-2 border-on-surface bg-surface-container-low p-unit-4 neo-shadow">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-on-surface pb-unit-2 mb-unit-3 gap-2">
+<div class="flex items-center gap-unit-2">
+<span class="px-unit-2 py-0.5 bg-on-surface text-surface-container-lowest font-code-sm text-code-sm font-bold">ROUND 01</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">TREASURY AGENT → INITIAL OFFER</span>
+</div>
+<div class="flex items-center gap-unit-2 font-code-sm text-xs">
+<span class="text-secondary">0xaa91...38bc</span>
+<span class="px-unit-2 py-0.5 bg-emerald-100 text-emerald-800 border border-on-surface font-bold">SIG: VERIFIED</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-unit-4 font-code-sm">
+<div class="bg-surface-container-lowest p-unit-2 border border-on-surface">
+<div class="text-secondary text-[10px]">CAPITAL</div>
+<div class="font-bold text-sm">$100,000 USDC</div>
+</div>
+<div class="bg-surface-container-lowest p-unit-2 border border-on-surface">
+<div class="text-secondary text-[10px]">PROPOSED DURATION</div>
+<div class="font-bold text-sm">30 Days</div>
+</div>
+<div class="bg-surface-container-lowest p-unit-2 border border-on-surface">
+<div class="text-secondary text-[10px]">REQUESTED YIELD</div>
+<div class="font-bold text-sm text-primary">8.00% APR</div>
+</div>
+</div>
+<div class="mt-unit-3 text-xs font-code-sm text-secondary border-l-2 border-on-surface pl-unit-2">
+<span class="font-bold text-on-surface">Rationale:</span> Benchmark risk-free baseline allocation rate with 30-day liquidity horizon constraint.
+            </div>
+</div>
+<!-- ROUND 02 -->
+<div class="border-2 border-on-surface bg-surface-container-low p-unit-4 neo-shadow ml-0 sm:ml-unit-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-on-surface pb-unit-2 mb-unit-3 gap-2">
+<div class="flex items-center gap-unit-2">
+<span class="px-unit-2 py-0.5 bg-primary-container text-on-primary font-code-sm text-code-sm font-bold">ROUND 02</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">STRATEGY AGENT → COUNTER-OFFER</span>
+</div>
+<div class="flex items-center gap-unit-2 font-code-sm text-xs">
+<span class="text-secondary">0x77c2...51da</span>
+<span class="px-unit-2 py-0.5 bg-emerald-100 text-emerald-800 border border-on-surface font-bold">SIG: VERIFIED</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-unit-4 font-code-sm">
+<div class="bg-surface-container-lowest p-unit-2 border border-on-surface">
+<div class="text-secondary text-[10px]">CAPITAL</div>
+<div class="font-bold text-sm">$100,000 USDC</div>
+</div>
+<div class="bg-surface-container-lowest p-unit-2 border border-on-surface">
+<div class="text-secondary text-[10px]">PROPOSED DURATION</div>
+<div class="font-bold text-sm">30 Days</div>
+</div>
+<div class="bg-surface-container-lowest p-unit-2 border border-on-surface">
+<div class="text-secondary text-[10px]">PROPOSED YIELD</div>
+<div class="font-bold text-sm text-primary">8.80% APR</div>
+</div>
+</div>
+<div class="mt-unit-3 text-xs font-code-sm text-secondary border-l-2 border-primary pl-unit-2">
+<span class="font-bold text-on-surface">Rationale:</span> Target curve supports 8.80% under current DEX pool utilization; higher yield requested to lock longer duration.
+            </div>
+</div>
+<!-- ROUND 03 -->
+<div class="border-2 border-on-surface bg-surface-container-low p-unit-4 neo-shadow">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-on-surface pb-unit-2 mb-unit-3 gap-2">
+<div class="flex items-center gap-unit-2">
+<span class="px-unit-2 py-0.5 bg-on-surface text-surface-container-lowest font-code-sm text-code-sm font-bold">ROUND 03</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">TREASURY AGENT → COUNTER-OFFER</span>
+</div>
+<div class="flex items-center gap-unit-2 font-code-sm text-xs">
+<span class="text-secondary">0x62e4...119c</span>
+<span class="px-unit-2 py-0.5 bg-emerald-100 text-emerald-800 border border-on-surface font-bold">SIG: VERIFIED</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-unit-4 font-code-sm">
+<div class="bg-surface-container-lowest p-unit-2 border border-on-surface">
+<div class="text-secondary text-[10px]">CAPITAL</div>
+<div class="font-bold text-sm">$100,000 USDC</div>
+</div>
+<div class="bg-surface-container-lowest p-unit-2 border border-on-surface">
+<div class="text-secondary text-[10px]">PROPOSED DURATION</div>
+<div class="font-bold text-sm text-tertiary">25 Days (Optimized)</div>
+</div>
+<div class="bg-surface-container-lowest p-unit-2 border border-on-surface">
+<div class="text-secondary text-[10px]">PROPOSED YIELD</div>
+<div class="font-bold text-sm text-primary">8.40% APR</div>
+</div>
+</div>
+<div class="mt-unit-3 text-xs font-code-sm text-secondary border-l-2 border-on-surface pl-unit-2">
+<span class="font-bold text-on-surface">Rationale:</span> Private policy constraints require amortizing capital within 25 days if yield exceeds 8.20%. Compromise struck at 8.40%.
+            </div>
+</div>
+<!-- ROUND 04 (ACCEPTANCE) -->
+<div class="border-2 border-on-surface bg-emerald-50 p-unit-4 neo-shadow ml-0 sm:ml-unit-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-on-surface pb-unit-2 mb-unit-3 gap-2">
+<div class="flex items-center gap-unit-2">
+<span class="px-unit-2 py-0.5 bg-emerald-700 text-white font-code-sm text-code-sm font-bold">ROUND 04</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">STRATEGY AGENT → ACCEPTANCE & COMMIT</span>
+</div>
+<div class="flex items-center gap-unit-2 font-code-sm text-xs">
+<span class="text-secondary">0x992b...e041</span>
+<span class="px-unit-2 py-0.5 bg-emerald-600 text-white border border-on-surface font-bold">AGREEMENT CONVERGED</span>
+</div>
+</div>
+<div class="p-unit-3 bg-white border border-on-surface text-xs font-code-sm space-y-1">
+<div class="text-on-surface font-bold">Terms Accepted: $100,000 USDC | 25 Days | 8.40% APR | Arc Escrow Condition Confirmed</div>
+<div class="text-secondary">Both cryptographic agents signed the canonical Agreement Matrix. Proceeding to confidential policy verification.</div>
+</div>
+</div>
+</div>
+<!-- Negotiation Status Footer Banner -->
+<div class="bg-surface-container border-t-2 border-on-surface p-unit-4 flex flex-col md:flex-row items-center justify-between gap-unit-4">
+<div class="flex items-center gap-unit-4">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">
+              FINAL TERMS: $100,000 USDC @ 8.40% (25d)
+            </div>
+<div class="hidden sm:block h-6 w-px bg-outline"></div>
+<div class="text-xs font-code-sm text-secondary">
+              POLICY COMMITMENT: <span class="font-bold text-on-surface">0x71c4...9e11</span>
+</div>
+</div>
+<div class="flex items-center gap-unit-2">
+<button class="px-unit-4 py-unit-2 bg-primary-container text-on-primary border-2 border-on-surface neo-shadow neo-press font-code-sm text-code-sm font-bold uppercase tracking-wider hover:bg-primary flex items-center gap-unit-2" onclick="switchTab('monitoring')">
+<span class="material-symbols-outlined text-sm" data-icon="lock_open">lock_open</span> VALIDATE PRIVATE POLICY
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- ======================================================= -->
+<!-- TAB 3: POSITION MONITORING & BREACH ENGINE (INTERACTIVE) -->
+<!-- ======================================================= -->
+<div class="tab-content space-y-unit-6" id="tab-monitoring">
+<!-- Top Title & Simulation Status -->
+<div class="border-b-2 border-on-surface pb-unit-4 flex flex-col md:flex-row md:items-center justify-between gap-unit-3">
+<div>
+<div class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-widest mb-unit-1">ACTIVE ENFORCEMENT RUNTIME</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Position Monitoring & Breach Engine</h1>
+<p class="font-body-md text-body-md text-secondary">Evaluating continuous off-chain telemetry against zero-knowledge confidential agreement policies.</p>
+</div>
+<div class="flex items-center gap-unit-2">
+<span class="px-unit-3 py-1 bg-emerald-100 text-emerald-800 font-code-sm text-code-sm font-bold border-2 border-on-surface neo-shadow uppercase" id="runtime-status-pill">
+            ARC ESCROW: CAPITAL SECURED
+          </span>
+</div>
+</div>
+<!-- Agreement Quick Header Stats -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-unit-4">
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-4">
+<div class="font-label-caps text-label-caps text-secondary uppercase">Committed Principal</div>
+<div class="font-num-headline text-num-headline font-bold text-on-surface mt-1" id="monitor-principal">$100,000 USDC</div>
+<div class="text-xs font-code-sm text-secondary">Arc Escrow Sub-account #01</div>
+</div>
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-4">
+<div class="font-label-caps text-label-caps text-secondary uppercase">Effective Yield Rate</div>
+<div class="font-num-headline text-num-headline font-bold text-primary mt-1">8.40% APR</div>
+<div class="text-xs font-code-sm text-secondary">Fixed Rate Covenant</div>
+</div>
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-4">
+<div class="font-label-caps text-label-caps text-secondary uppercase">Duration Remaining</div>
+<div class="font-num-headline text-num-headline font-bold text-on-surface mt-1">25 DAYS</div>
+<div class="text-xs font-code-sm text-secondary">Maturity: Block #19,542,000</div>
+</div>
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-4">
+<div class="font-label-caps text-label-caps text-secondary uppercase">Enforcement Channel</div>
+<div class="font-num-headline text-num-headline font-bold text-on-surface mt-1">CROSS-CHAIN</div>
+<div class="text-xs font-code-sm text-tertiary font-bold">Sepolia ↔ Arc Protocol Relay</div>
+</div>
+</div>
+<!-- LIVE RISK TELEMETRY & CONFIDENTIAL THRESHOLD -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-6 space-y-unit-4">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-unit-2 border-b-2 border-on-surface pb-unit-3">
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-base" data-icon="speed">speed</span>
+              OBSERVED MARKET RISK METRIC
+            </div>
+<div class="font-code-sm text-code-sm text-secondary">Aggregated volatility index & counterparty collateral ratio</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-secondary uppercase">CURRENT RISK SCORE:</span>
+<span class="font-num-headline text-num-headline font-bold text-tertiary" id="risk-score-display">1.8%</span>
+</div>
+</div>
+<!-- Segmented Health Gauge (Neo-Brutalist segmented blocks) -->
+<div>
+<div class="h-6 w-full flex border-2 border-on-surface p-0.5 bg-surface-container gap-1">
+<div class="h-full flex-1 bg-emerald-600 transition-all duration-300" id="bar-1"></div>
+<div class="h-full flex-1 bg-surface-container-highest transition-all duration-300" id="bar-2"></div>
+<div class="h-full flex-1 bg-surface-container-highest transition-all duration-300" id="bar-3"></div>
+<div class="h-full flex-1 bg-surface-container-highest transition-all duration-300" id="bar-4"></div>
+<div class="h-full flex-1 bg-surface-container-highest transition-all duration-300" id="bar-5"></div>
+</div>
+<div class="flex justify-between text-xs font-code-sm text-secondary mt-1">
+<span>1.8% (NORMAL)</span>
+<span>2.1%</span>
+<span>2.5%</span>
+<span>2.8%</span>
+<span>3.1% (CRITICAL)</span>
+</div>
+</div>
+<!-- Confidentiality Badge Banner -->
+<div class="p-unit-3 bg-surface-container border-2 border-dashed border-on-surface flex flex-col sm:flex-row sm:items-center justify-between gap-unit-2 text-xs font-code-sm">
+<div class="flex items-center gap-unit-2">
+<span class="material-symbols-outlined text-base text-primary" data-icon="shield">shield</span>
+<span class="font-bold text-on-surface">CONFIDENTIAL RISK THRESHOLD LOCKED</span>
+</div>
+<div class="text-secondary">
+            Boundary evaluated off-chain in private policy commitment. <span class="font-bold text-on-surface underline">Exact threshold undisclosed to counterparties.</span>
+</div>
+</div>
+</div>
+<!-- SIMULATION CONTROL PLANE (INTERACTIVE TRIGGER) -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-unit-3 mb-unit-4">
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-error" data-icon="science">science</span>
+              PROTOCOL STRESS TEST // SIMULATION CONTROL PLANE
+            </div>
+<div class="font-code-sm text-code-sm text-secondary">Step through market volatility to test autonomous private enforcement.</div>
+</div>
+<div class="flex items-center gap-unit-2 font-code-sm text-xs">
+<span class="font-bold">CURRENT SIMULATION STATE:</span>
+<span class="px-unit-2 py-1 bg-surface-container border border-on-surface font-bold text-on-surface" id="simulation-step-text">STEP 1 OF 5 (1.8% NORMAL)</span>
+</div>
+</div>
+<!-- Interactive Trigger Button Strip -->
+<div class="flex flex-wrap items-center gap-unit-3">
+<button class="px-unit-6 py-unit-3 bg-primary-container text-on-primary font-code-md text-code-md font-bold uppercase tracking-wider border-2 border-on-surface neo-shadow neo-press hover:bg-primary flex items-center gap-2" id="btn-trigger-risk" onclick="triggerNextRiskStep()">
+<span class="material-symbols-outlined text-base" data-icon="bolt">bolt</span>
+<span>TRIGGER ADVERSE RISK EVENT</span>
+</button>
+<button class="px-unit-4 py-unit-3 bg-surface-container-lowest text-on-surface font-code-md text-code-md font-bold uppercase border-2 border-on-surface neo-shadow neo-press hover:bg-surface-container" id="btn-reset-sim" onclick="resetSimulation()">
+            RESET SIMULATION
+          </button>
+<span class="text-xs font-code-sm text-secondary">
+            * Simulates off-chain oracle streaming adverse market delta until breach condition trips.
+          </span>
+</div>
+</div>
+<!-- DYNAMIC BREACH STATE TRANSFORMATION PANEL (Hidden until breach) -->
+<div class="hidden space-y-unit-6" id="breach-panel">
+<!-- High-Contrast Crimson Breach Banner -->
+<div class="border-2 border-on-surface bg-red-600 text-white p-unit-6 neo-shadow">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-unit-3">
+<div class="flex items-center gap-unit-4">
+<div class="w-12 h-12 bg-white text-red-600 flex items-center justify-center font-bold text-2xl border-2 border-on-surface">
+                !
+              </div>
+<div>
+<div class="font-headline-lg text-headline-lg font-bold tracking-tight">BREACH VERIFIED // PRIVATE POLICY TRIGGERED</div>
+<div class="font-code-sm text-code-sm text-red-100">Observed Risk (3.1%) exceeded confidential threshold encoded in Policy Commitment 0x71c4...9e11</div>
+</div>
+</div>
+<div class="font-code-sm text-xs px-unit-3 py-1 bg-white text-red-700 font-bold border border-on-surface uppercase">
+              AUTONOMOUS UNWIND ENGAGED
+            </div>
+</div>
+</div>
+<!-- 4-STEP VERIFIED EXECUTION CHECKLIST -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-6">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface mb-unit-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-tertiary" data-icon="fact_check">fact_check</span>
+            AUTONOMOUS UNWIND PIPELINE // VERIFIED STEPS
+          </div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-unit-4">
+<div class="p-unit-3 bg-surface-container border-2 border-on-surface">
+<div class="flex items-center justify-between text-xs font-code-sm mb-1">
+<span class="font-bold">STEP 01</span>
+<span class="text-tertiary font-bold">✓ DONE</span>
+</div>
+<div class="font-bold text-sm text-on-surface">Private Policy Evaluated</div>
+<div class="text-xs font-code-sm text-secondary mt-1">Off-chain ZK evaluator computed delta exceeding commitment.</div>
+</div>
+<div class="p-unit-3 bg-surface-container border-2 border-on-surface">
+<div class="flex items-center justify-between text-xs font-code-sm mb-1">
+<span class="font-bold">STEP 02</span>
+<span class="text-tertiary font-bold">✓ DONE</span>
+</div>
+<div class="font-bold text-sm text-on-surface">Recorded on Sepolia</div>
+<div class="text-xs font-code-sm text-secondary mt-1">Decision proof registered on-chain at TX 0x71ab...c841.</div>
+</div>
+<div class="p-unit-3 bg-surface-container border-2 border-on-surface">
+<div class="flex items-center justify-between text-xs font-code-sm mb-1">
+<span class="font-bold">STEP 03</span>
+<span class="text-tertiary font-bold">✓ DONE</span>
+</div>
+<div class="font-bold text-sm text-on-surface">Relay Submitted</div>
+<div class="text-xs font-code-sm text-secondary mt-1">Cross-chain cryptographic message dispatched to Arc Escrow.</div>
+</div>
+<div class="p-unit-3 bg-surface-container border-2 border-on-surface">
+<div class="flex items-center justify-between text-xs font-code-sm mb-1">
+<span class="font-bold">STEP 04</span>
+<span class="text-tertiary font-bold">✓ DONE</span>
+</div>
+<div class="font-bold text-sm text-on-surface">Arc Escrow Unwind</div>
+<div class="text-xs font-code-sm text-secondary mt-1">Capital release sequence triggered back to Treasury safe.</div>
+</div>
+</div>
+</div>
+<!-- CROSS-CHAIN RELAY FLOW & CAPITAL PROTECTION BANNER -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-6">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface mb-unit-4">
+            CROSS-CHAIN ESCROW RECOVERY TELEMETRY
+          </div>
+<div class="flex flex-col md:flex-row items-stretch justify-between gap-unit-4">
+<!-- Chain A -->
+<div class="flex-1 p-unit-4 bg-surface-container border border-on-surface">
+<div class="font-label-caps text-label-caps text-secondary uppercase font-bold">SOURCE CHAIN</div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface mt-1">Ethereum Sepolia</div>
+<div class="text-xs font-code-sm text-secondary mt-2">Breach Proof Hash:</div>
+<div class="text-xs font-code-sm font-bold truncate">0x71abcde49100fa12847120c8419</div>
+<div class="mt-2 text-xs font-code-sm text-tertiary font-bold">STATE: DECISION RECORDED</div>
+</div>
+<!-- Arrow Bridge -->
+<div class="flex flex-col items-center justify-center text-secondary px-unit-2">
+<span class="material-symbols-outlined text-2xl text-on-surface" data-icon="east">east</span>
+<span class="font-code-sm text-[10px] font-bold uppercase">Cross-chain Relay</span>
+</div>
+<!-- Chain B -->
+<div class="flex-1 p-unit-4 bg-surface-container border border-on-surface">
+<div class="font-label-caps text-label-caps text-secondary uppercase font-bold">DESTINATION ESCROW</div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface mt-1">Arc Settlement Engine</div>
+<div class="text-xs font-code-sm text-secondary mt-2">Action Dispatched:</div>
+<div class="text-xs font-code-sm font-bold text-error">ESCROW_UNWIND_CONFIRMED</div>
+<div class="mt-2 text-xs font-code-sm text-tertiary font-bold">STATE: CAPITAL RETURNED</div>
+</div>
+</div>
+<!-- Final Capital Protected Box -->
+<div class="mt-unit-6 p-unit-4 bg-emerald-50 border-2 border-on-surface neo-shadow flex flex-col sm:flex-row sm:items-center justify-between gap-unit-3">
+<div>
+<div class="font-label-caps text-label-caps text-emerald-800 uppercase font-bold">SOLVENCY PRESERVATION VERIFIED</div>
+<div class="font-headline-md text-headline-md font-bold text-emerald-950">$100,000.00 USDC RETURNED TO TREASURY</div>
+<div class="text-xs font-code-sm text-emerald-800 mt-1">0% Capital Loss incurred. Agreement #SOV-8F29 status moved to TERMINATED / FULLY PROTECTED.</div>
+</div>
+<div class="flex items-center gap-unit-2">
+<a class="px-unit-4 py-unit-2 bg-on-surface text-surface-container-lowest font-code-sm text-code-sm font-bold border border-on-surface neo-shadow uppercase" href="#overview" onclick="switchTab('overview')">
+                Return to Overview
+              </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- TAB 4: CREATE INTENT (PRIVATE POLICY FORM) -->
+<!-- ========================================== -->
+<div class="tab-content space-y-unit-6" id="tab-create-intent">
+<div class="border-b-2 border-on-surface pb-unit-4">
+<div class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-widest mb-unit-1">POLICY DEFINITION STUDIO</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Create Intent</h1>
+<p class="font-body-md text-body-md text-secondary">Define the outcome your treasury agent should negotiate toward. Encrypt private policy rules off-chain.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-unit-6">
+<!-- Left 2 Cols: Public Parameters & Private Policy -->
+<div class="lg:col-span-2 space-y-unit-6">
+<!-- PUBLIC INTENT CARD -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-6">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface mb-unit-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-base" data-icon="public">public</span>
+              PUBLIC INTENT PARAMETERS
+            </div>
+<div class="font-code-sm text-code-sm text-secondary mb-unit-4">Visible to counterparty agents in the peer-to-peer negotiation matrix.</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-unit-4">
+<div>
+<label class="block font-label-caps text-label-caps text-secondary uppercase mb-1">Asset Symbol</label>
+<div class="flex">
+<input class="w-full bg-surface-container border border-on-surface px-unit-3 py-unit-2 font-code-md text-code-md font-bold focus:outline-none cursor-not-allowed" readonly="" type="text" value="USDC"/>
+<span class="px-unit-3 py-unit-2 bg-surface-container-high border-y border-r border-on-surface font-code-sm text-code-sm font-bold flex items-center">ERC-20</span>
+</div>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-secondary uppercase mb-1">Committed Allocation Capital</label>
+<div class="flex">
+<input class="w-full bg-surface-container-lowest border border-on-surface px-unit-3 py-unit-2 font-code-md text-code-md font-bold focus:ring-1 focus:ring-primary" type="text" value="100,000"/>
+<span class="px-unit-3 py-unit-2 bg-surface-container border-y border-r border-on-surface font-code-sm text-code-sm font-bold flex items-center">USDC</span>
+</div>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-secondary uppercase mb-1">Purpose / Strategy Target</label>
+<input class="w-full bg-surface-container-lowest border border-on-surface px-unit-3 py-unit-2 font-body-md text-body-md focus:ring-1 focus:ring-primary" type="text" value="Delta-Neutral Yield Arbitrage"/>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-secondary uppercase mb-1">Max Duration Boundary</label>
+<div class="flex">
+<input class="w-full bg-surface-container-lowest border border-on-surface px-unit-3 py-unit-2 font-code-md text-code-md font-bold focus:ring-1 focus:ring-primary" type="text" value="30"/>
+<span class="px-unit-3 py-unit-2 bg-surface-container border-y border-r border-on-surface font-code-sm text-code-sm font-bold flex items-center">DAYS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- PRIVATE POLICY MODULE (Heavy Border & Confidential Tag) -->
+<div class="bg-surface-container-low border-2 border-on-surface neo-shadow p-unit-6 relative">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-unit-3">
+<div class="flex items-center gap-unit-2">
+<span class="material-symbols-outlined text-base text-primary" data-icon="enhanced_encryption">enhanced_encryption</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">CONFIDENTIAL PRIVATE POLICY</span>
+</div>
+<span class="px-unit-2 py-0.5 bg-primary-container text-on-primary font-code-sm text-xs font-bold border border-on-surface tracking-wider">
+                ENCRYPTED OFF-CHAIN
+              </span>
+</div>
+<div class="p-unit-3 bg-surface-container-lowest border border-dashed border-on-surface text-xs font-code-sm text-secondary mb-unit-4">
+<span class="font-bold text-on-surface">IMPORTANT SECURITY NOTICE:</span> Policy parameters below remain strictly confidential and are NEVER revealed to counterparties or on-chain contracts. Only cryptographic commitments and breach proofs are broadcast.
+            </div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-unit-4">
+<div>
+<label class="block font-label-caps text-label-caps text-secondary uppercase mb-1">Minimum Acceptable Yield (Hard Floor)</label>
+<div class="flex">
+<input class="w-full bg-surface-container-lowest border border-on-surface px-unit-3 py-unit-2 font-code-md text-code-md font-bold text-primary focus:ring-1 focus:ring-primary" type="text" value="8.00"/>
+<span class="px-unit-3 py-unit-2 bg-surface-container border-y border-r border-on-surface font-code-sm text-code-sm font-bold flex items-center">% APR</span>
+</div>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-secondary uppercase mb-1">Max Drawdown Tolerance (Breach Threshold)</label>
+<div class="flex">
+<input class="w-full bg-surface-container-lowest border border-on-surface px-unit-3 py-unit-2 font-code-md text-code-md font-bold text-error focus:ring-1 focus:ring-primary" type="text" value="3.00"/>
+<span class="px-unit-3 py-unit-2 bg-surface-container border-y border-r border-on-surface font-code-sm text-code-sm font-bold flex items-center">% RISK</span>
+</div>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-secondary uppercase mb-1">Mandatory Amortization Period</label>
+<input class="w-full bg-surface-container-lowest border border-on-surface px-unit-3 py-unit-2 font-code-md text-code-md font-bold focus:ring-1 focus:ring-primary" type="text" value="25 Days (if yield < 8.5%)"/>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-secondary uppercase mb-1">Cryptographic Policy Salt (Entropy)</label>
+<input class="w-full bg-surface-container border border-on-surface px-unit-3 py-unit-2 font-code-md text-code-md font-bold select-all text-secondary" readonly="" type="text" value="0x94f0e1a499bc88a7c2"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Right 1 Col: Hash Preview & Commitment Action -->
+<div class="space-y-unit-6">
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-6 space-y-unit-4">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">Commitment Preview</div>
+<div class="text-xs font-code-sm text-secondary">
+              Hash root generated deterministically by computing the Poseidon hash of your confidential constraints + public intent.
+            </div>
+<div class="p-unit-3 bg-surface-container border border-on-surface space-y-1">
+<div class="font-label-caps text-label-caps text-secondary uppercase font-bold">Generated Policy Commitment:</div>
+<div class="font-code-sm text-code-sm font-bold text-on-surface break-all select-all">
+                0x71c4801fbde9e11504936d8193aef49204bc99
+              </div>
+</div>
+<div class="p-unit-3 bg-surface-container border border-on-surface space-y-1">
+<div class="font-label-caps text-label-caps text-secondary uppercase font-bold">Authorized Treasury Signer:</div>
+<div class="font-code-sm text-code-sm font-bold text-on-surface">
+                treasury.sovereign.eth
+              </div>
+<div class="text-[10px] font-code-sm text-secondary">0x82a9...91fd</div>
+</div>
+<button class="w-full py-unit-3 bg-primary-container text-on-primary font-code-md text-code-md font-bold uppercase tracking-wider border-2 border-on-surface neo-shadow neo-press hover:bg-primary flex items-center justify-center gap-unit-2" onclick="switchTab('negotiation')">
+<span class="material-symbols-outlined text-base" data-icon="send">send</span>
+<span>SIGN & DISPATCH INTENT</span>
+</button>
+<div class="text-center font-code-sm text-[10px] text-secondary">
+              DISPATCHES TO SOVEREIGN P2P RELAY (SEPOLIA)
+            </div>
+</div>
+<!-- Escrow Readiness Checklist Box -->
+<div class="bg-surface-container border-2 border-on-surface p-unit-4 space-y-unit-2 text-xs font-code-sm">
+<div class="font-bold text-on-surface uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-tertiary" data-icon="check_circle">check_circle</span>
+              ARC ESCROW SOLVENCY CHECK
+            </div>
+<div class="text-secondary">• Treasury Vault Balance: 840,000 USDC</div>
+<div class="text-secondary">• Escrow Sub-account: Ready for lock</div>
+<div class="text-secondary">• Gas Reserve: 0.45 ETH (Sepolia)</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- TAB 5: ACTIVITY (CROSS-CHAIN AUDIT LOG) -->
+<!-- ========================================== -->
+<div class="tab-content space-y-unit-6" id="tab-activity">
+<div class="border-b-2 border-on-surface pb-unit-4 flex flex-col md:flex-row md:items-center justify-between gap-unit-3">
+<div>
+<div class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-widest mb-unit-1">HISTORICAL RECORD</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Activity & Cross-Chain Ledger</h1>
+<p class="font-body-md text-body-md text-secondary">Deterministic state trace across Ethereum Sepolia and Arc Escrow Protocol.</p>
+</div>
+<div class="font-code-sm text-xs font-bold px-unit-3 py-1 bg-surface-container-lowest border-2 border-on-surface neo-shadow">
+          LEDGER FILTER: ALL CHAINS
+        </div>
+</div>
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high border-b-2 border-on-surface font-label-caps text-label-caps text-secondary uppercase">
+<th class="p-unit-3">BLOCK / TIME</th>
+<th class="p-unit-3">TX HASH</th>
+<th class="p-unit-3">CHAIN</th>
+<th class="p-unit-3">EVENT PROTOCOL LOG</th>
+<th class="p-unit-3">STATE COMMITMENT</th>
+<th class="p-unit-3 text-right">FINALITY</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-on-surface/20 font-code-sm text-code-sm">
+<tr class="hover:bg-surface">
+<td class="p-unit-3 font-bold">#19,482,104 <span class="text-secondary block text-[10px]">10m ago</span></td>
+<td class="p-unit-3 text-primary font-bold">0x4a19...99ca</td>
+<td class="p-unit-3"><span class="px-2 py-0.5 bg-blue-100 text-blue-900 border border-on-surface font-bold text-[10px]">ARC</span></td>
+<td class="p-unit-3 font-bold">ArcEscrow.lockCapital(sov-escrow-main-4, $100k)</td>
+<td class="p-unit-3 text-secondary truncate max-w-[120px]">0x8f29...a72c</td>
+<td class="p-unit-3 text-right"><span class="text-tertiary font-bold">FINALIZED</span></td>
+</tr>
+<tr class="hover:bg-surface">
+<td class="p-unit-3 font-bold">#19,482,098 <span class="text-secondary block text-[10px]">14m ago</span></td>
+<td class="p-unit-3 text-primary font-bold">0x81d2...a43b</td>
+<td class="p-unit-3"><span class="px-2 py-0.5 bg-gray-100 text-gray-900 border border-on-surface font-bold text-[10px]">SEPOLIA</span></td>
+<td class="p-unit-3 font-bold">AgreementRegistry.registerAgreement(#SOV-8F29)</td>
+<td class="p-unit-3 text-secondary truncate max-w-[120px]">0x71c4...9e11</td>
+<td class="p-unit-3 text-right"><span class="text-tertiary font-bold">FINALIZED</span></td>
+</tr>
+<tr class="hover:bg-surface">
+<td class="p-unit-3 font-bold">#19,482,084 <span class="text-secondary block text-[10px]">22m ago</span></td>
+<td class="p-unit-3 text-primary font-bold">0x992b...e041</td>
+<td class="p-unit-3"><span class="px-2 py-0.5 bg-gray-100 text-gray-900 border border-on-surface font-bold text-[10px]">SEPOLIA</span></td>
+<td class="p-unit-3 font-bold">P2PNegotiator.submitConvergenceSig(Round 04)</td>
+<td class="p-unit-3 text-secondary truncate max-w-[120px]">0x51d2...87ab</td>
+<td class="p-unit-3 text-right"><span class="text-tertiary font-bold">FINALIZED</span></td>
+</tr>
+<tr class="hover:bg-surface">
+<td class="p-unit-3 font-bold">#19,482,040 <span class="text-secondary block text-[10px]">45m ago</span></td>
+<td class="p-unit-3 text-primary font-bold">0x33e8...11bc</td>
+<td class="p-unit-3"><span class="px-2 py-0.5 bg-gray-100 text-gray-900 border border-on-surface font-bold text-[10px]">SEPOLIA</span></td>
+<td class="p-unit-3 font-bold">TreasuryPolicy.postIntentCommitment(0x71c4...9e11)</td>
+<td class="p-unit-3 text-secondary truncate max-w-[120px]">0x82a9...91fd</td>
+<td class="p-unit-3 text-right"><span class="text-tertiary font-bold">FINALIZED</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- TAB 6: AGENTS DIRECTORY -->
+<!-- ========================================== -->
+<div class="tab-content space-y-unit-6" id="tab-agents">
+<div class="border-b-2 border-on-surface pb-unit-4">
+<div class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-widest mb-unit-1">CRYPTOGRAPHIC IDENTITY</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Authorized Protocol Agents</h1>
+<p class="font-body-md text-body-md text-secondary">Verified autonomous signer identities and execution permissions.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-unit-6">
+<!-- Agent 1 -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-6 space-y-unit-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-unit-3">
+<div class="w-12 h-12 bg-on-surface text-surface-container-lowest flex items-center justify-center font-bold text-lg">
+                TA
+              </div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">treasury.sovereign.eth</div>
+<div class="font-code-sm text-code-sm text-secondary">Primary Treasury Allocator</div>
+</div>
+</div>
+<span class="px-unit-2 py-1 bg-emerald-100 text-emerald-800 border border-on-surface font-code-sm text-xs font-bold">AUTHORIZED</span>
+</div>
+<div class="p-unit-3 bg-surface-container border border-on-surface space-y-2 text-xs font-code-sm">
+<div class="flex justify-between">
+<span class="text-secondary font-medium">Public Key Address:</span>
+<span class="font-bold">0x82a9482701bca72891fd</span>
+</div>
+<div class="flex justify-between">
+<span class="text-secondary font-medium">Delegation Contract:</span>
+<span class="font-bold">0x1942...88cc (Sepolia)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-secondary font-medium">Authorized Capital Cap:</span>
+<span class="font-bold text-tertiary">$1,000,000 USDC</span>
+</div>
+<div class="flex justify-between">
+<span class="text-secondary font-medium">Active Agreements:</span>
+<span class="font-bold">1 (#SOV-8F29)</span>
+</div>
+</div>
+<div class="pt-unit-2 border-t border-on-surface flex justify-between items-center text-xs font-code-sm">
+<span class="text-secondary">Signature Scheme: EIP-712 + ZK SNARK</span>
+<span class="text-primary font-bold">View Key Matrix →</span>
+</div>
+</div>
+<!-- Agent 2 -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-6 space-y-unit-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-unit-3">
+<div class="w-12 h-12 bg-primary-container text-on-primary flex items-center justify-center font-bold text-lg">
+                SA
+              </div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">strategy.sovereign.eth</div>
+<div class="font-code-sm text-code-sm text-secondary">Strategy Execution Node v4</div>
+</div>
+</div>
+<span class="px-unit-2 py-1 bg-emerald-100 text-emerald-800 border border-on-surface font-code-sm text-xs font-bold">AUTHORIZED</span>
+</div>
+<div class="p-unit-3 bg-surface-container border border-on-surface space-y-2 text-xs font-code-sm">
+<div class="flex justify-between">
+<span class="text-secondary font-medium">Public Key Address:</span>
+<span class="font-bold">0x51d2e1194ca00b987ab</span>
+</div>
+<div class="flex justify-between">
+<span class="text-secondary font-medium">Escrow Channel:</span>
+<span class="font-bold">Arc Protocol Channel #4</span>
+</div>
+<div class="flex justify-between">
+<span class="text-secondary font-medium">Execution Capacity:</span>
+<span class="font-bold text-primary">Unconstrained ($2.4M TVL)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-secondary font-medium">Active Agreements:</span>
+<span class="font-bold">1 (#SOV-8F29)</span>
+</div>
+</div>
+<div class="pt-unit-2 border-t border-on-surface flex justify-between items-center text-xs font-code-sm">
+<span class="text-secondary">Execution Container: SGX Enclave v2</span>
+<span class="text-primary font-bold">View Attestation →</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- TAB 7: AGREEMENTS LIST TAB -->
+<!-- ========================================== -->
+<div class="tab-content space-y-unit-6" id="tab-agreements">
+<div class="border-b-2 border-on-surface pb-unit-4 flex flex-col md:flex-row md:items-center justify-between gap-unit-3">
+<div>
+<div class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-widest mb-unit-1">COVENANT REGISTRY</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Financial Agreements</h1>
+<p class="font-body-md text-body-md text-secondary">All signed, active, and amortized protocol agreements.</p>
+</div>
+<button class="px-unit-4 py-unit-2 bg-primary-container text-on-primary font-code-sm text-code-sm font-bold border-2 border-on-surface neo-shadow neo-press uppercase" onclick="switchTab('create-intent')">
+          + Deploy New Intent
+        </button>
+</div>
+<div class="space-y-unit-4">
+<!-- Agreement 1 Item -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-4 flex flex-col md:flex-row md:items-center justify-between gap-unit-4">
+<div class="flex items-center gap-unit-4">
+<div class="w-10 h-10 bg-on-surface text-surface-container-lowest flex items-center justify-center font-bold font-code-md">
+              01
+            </div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-2">
+                AGREEMENT #SOV-8F29
+                <span class="px-unit-2 py-0.5 bg-emerald-100 text-emerald-800 border border-on-surface text-xs font-code-sm font-bold uppercase">ACTIVE</span>
+</div>
+<div class="text-xs font-code-sm text-secondary">
+                treasury.sovereign.eth ↔ strategy.sovereign.eth • Principal: $100,000 USDC @ 8.40%
+              </div>
+</div>
+</div>
+<div class="flex items-center gap-unit-2">
+<button class="px-unit-3 py-unit-1.5 bg-surface-container border border-on-surface neo-shadow neo-press font-code-sm text-xs font-bold hover:bg-surface-container-high" onclick="switchTab('monitoring')">
+              Inspect Monitoring →
+            </button>
+</div>
+</div>
+<!-- Agreement 2 Item (Historical) -->
+<div class="bg-surface-container-lowest border-2 border-on-surface neo-shadow p-unit-4 flex flex-col md:flex-row md:items-center justify-between gap-unit-4 opacity-75">
+<div class="flex items-center gap-unit-4">
+<div class="w-10 h-10 bg-surface-container text-secondary flex items-center justify-center font-bold font-code-md border border-on-surface">
+              00
+            </div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-2">
+                AGREEMENT #SOV-7A12
+                <span class="px-unit-2 py-0.5 bg-surface-container-high text-on-surface border border-on-surface text-xs font-code-sm font-bold uppercase">MATURED & SETTLED</span>
+</div>
+<div class="text-xs font-code-sm text-secondary">
+                treasury.sovereign.eth ↔ mm.wintermute.eth • Principal: $250,000 USDC @ 7.80% (Completed)
+              </div>
+</div>
+</div>
+<div class="flex items-center gap-unit-2">
+<span class="text-xs font-code-sm text-secondary font-bold">Amortized 14 Oct 2025</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- INTERACTIVE APPLICATION CONTROLLER SCRIPT (Seamless Tab Switching & Simulation Engine) -->
+<script>
+    // Tab Controller
+    function switchTab(tabId) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+
+      // Show destination tab
+      const target = document.getElementById('tab-' + tabId);
+      if (target) {
+        target.classList.add('active');
+      }
+
+      // Update sidebar nav states
+      document.querySelectorAll('#sidebar-nav .nav-item').forEach(btn => {
+        const itemTab = btn.getAttribute('data-tab');
+        if (itemTab === tabId) {
+          btn.className = 'nav-item flex items-center gap-unit-3 px-unit-4 py-unit-3 bg-on-surface text-surface-container-lowest font-code-md text-code-md uppercase tracking-wider font-semibold border border-on-surface translate-x-0.5 translate-y-0.5 text-left w-full transition-none';
+        } else {
+          btn.className = 'nav-item flex items-center gap-unit-3 px-unit-4 py-unit-3 text-on-surface hover:bg-surface-container-high font-code-md text-code-md uppercase tracking-wider font-medium text-left w-full transition-none';
+        }
+      });
+
+      // Scroll to top of viewport
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    // Interactive Risk Simulation Engine State
+    const riskSteps = [
+      { score: "1.8%", label: "STEP 1 OF 5 (1.8% NORMAL)", level: 1, breach: false },
+      { score: "2.1%", label: "STEP 2 OF 5 (2.1% ELEVATED)", level: 2, breach: false },
+      { score: "2.5%", label: "STEP 3 OF 5 (2.5% VOLATILE)", level: 3, breach: false },
+      { score: "2.8%", label: "STEP 4 OF 5 (2.8% WARNING)", level: 4, breach: false },
+      { score: "3.1%", label: "STEP 5 OF 5 (3.1% CONFIDENTIAL BREACH!)", level: 5, breach: true }
+    ];
+    let currentStepIndex = 0;
+
+    function renderRiskState() {
+      const step = riskSteps[currentStepIndex];
+      
+      // Update text displays
+      const scoreDisplay = document.getElementById('risk-score-display');
+      const stepText = document.getElementById('simulation-step-text');
+      const overviewRiskTag = document.getElementById('overview-risk-tag');
+      
+      if (scoreDisplay) scoreDisplay.textContent = step.score;
+      if (stepText) stepText.textContent = step.label;
+      if (overviewRiskTag) {
+        overviewRiskTag.textContent = step.breach ? step.score + " / BREACH" : step.score + " / SAFE";
+        overviewRiskTag.className = step.breach ? "font-num-headline text-num-headline font-bold text-error mt-1" : "font-num-headline text-num-headline font-bold text-tertiary mt-1";
+      }
+
+      // Update Gauge Bar Segments
+      const bar1 = document.getElementById('bar-1');
+      const bar2 = document.getElementById('bar-2');
+      const bar3 = document.getElementById('bar-3');
+      const bar4 = document.getElementById('bar-4');
+      const bar5 = document.getElementById('bar-5');
+
+      const neutralClass = "h-full flex-1 bg-surface-container-highest transition-all duration-300";
+      
+      if (step.level === 1) {
+        bar1.className = "h-full flex-1 bg-emerald-600 transition-all duration-300";
+        bar2.className = neutralClass;
+        bar3.className = neutralClass;
+        bar4.className = neutralClass;
+        bar5.className = neutralClass;
+      } else if (step.level === 2) {
+        bar1.className = "h-full flex-1 bg-emerald-600 transition-all duration-300";
+        bar2.className = "h-full flex-1 bg-emerald-500 transition-all duration-300";
+        bar3.className = neutralClass;
+        bar4.className = neutralClass;
+        bar5.className = neutralClass;
+      } else if (step.level === 3) {
+        bar1.className = "h-full flex-1 bg-amber-500 transition-all duration-300";
+        bar2.className = "h-full flex-1 bg-amber-500 transition-all duration-300";
+        bar3.className = "h-full flex-1 bg-amber-500 transition-all duration-300";
+        bar4.className = neutralClass;
+        bar5.className = neutralClass;
+      } else if (step.level === 4) {
+        bar1.className = "h-full flex-1 bg-amber-600 transition-all duration-300";
+        bar2.className = "h-full flex-1 bg-amber-600 transition-all duration-300";
+        bar3.className = "h-full flex-1 bg-amber-600 transition-all duration-300";
+        bar4.className = "h-full flex-1 bg-orange-600 transition-all duration-300";
+        bar5.className = neutralClass;
+      } else if (step.level === 5) {
+        bar1.className = "h-full flex-1 bg-red-600 transition-all duration-300";
+        bar2.className = "h-full flex-1 bg-red-600 transition-all duration-300";
+        bar3.className = "h-full flex-1 bg-red-600 transition-all duration-300";
+        bar4.className = "h-full flex-1 bg-red-600 transition-all duration-300";
+        bar5.className = "h-full flex-1 bg-red-600 transition-all duration-300 animate-pulse";
+      }
+
+      // Handle Breach Panel Reveal
+      const breachPanel = document.getElementById('breach-panel');
+      const runtimeStatusPill = document.getElementById('runtime-status-pill');
+      const triggerBtn = document.getElementById('btn-trigger-risk');
+
+      if (step.breach) {
+        if (breachPanel) breachPanel.classList.remove('hidden');
+        if (runtimeStatusPill) {
+          runtimeStatusPill.className = "px-unit-3 py-1 bg-red-600 text-white font-code-sm text-code-sm font-bold border-2 border-on-surface neo-shadow uppercase animate-pulse";
+          runtimeStatusPill.textContent = "BREACH VERIFIED // UNWIND COMPLETE";
+        }
+        if (triggerBtn) {
+          triggerBtn.disabled = true;
+          triggerBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+      } else {
+        if (breachPanel) breachPanel.classList.add('hidden');
+        if (runtimeStatusPill) {
+          runtimeStatusPill.className = "px-unit-3 py-1 bg-emerald-100 text-emerald-800 font-code-sm text-code-sm font-bold border-2 border-on-surface neo-shadow uppercase";
+          runtimeStatusPill.textContent = "ARC ESCROW: CAPITAL SECURED";
+        }
+        if (triggerBtn) {
+          triggerBtn.disabled = false;
+          triggerBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+      }
+    }
+
+    function triggerNextRiskStep() {
+      if (currentStepIndex < riskSteps.length - 1) {
+        currentStepIndex++;
+        renderRiskState();
+      }
+    }
+
+    function resetSimulation() {
+      currentStepIndex = 0;
+      renderRiskState();
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderRiskState();
+    });
+  </script>
+</body></html>
